@@ -70,6 +70,7 @@ namespace vkr
              var wordDocument = wordApp.Documents.Open(document);
              string s = dataGridView1.CurrentCell.Value.ToString();
              Connection.Open();
+            int a = 0;
              string sqlExpression = "SELECT Поставщик.Название, Поставщик.[Контактное лицо], CONCAT('г. ', Поставщик.[Почтовый город], ' ул. ', Поставщик.[Почтовая улица], ' ',Поставщик.[Почтовый дом]," +
                 " ', ', Поставщик.[Почтовый индекс]), CONCAT('г. ', Поставщик.[Юр.Город], ' ул. ', Поставщик.[Юр.Улица], ' ',Поставщик.[Юр.Дом], ', ', Поставщик.[Юр.Индекс]), Поставщик.[ИНН поставщика]," +
                 " Поставщик.КПП, Поставщик.[Расчетный счет], Поставщик.[Кор.счет], Поставщик.БИК, Банк.Название FROM Договор INNER JOIN (Поставщик inner join Банк ON Банк.БИК=Поставщик.БИК) " +
@@ -80,10 +81,63 @@ namespace vkr
                 "ON Сотрудник.[Код должности] = Договор.[Код сотрудника] WHERE Договор.[Номер договора]= '" + s + "' AND Сотрудник.[Код должности] = 1";
              SqlCommand command = new SqlCommand(sqlExpression, Connection); 
              SqlDataReader reader = command.ExecuteReader();
-             if (reader.Read()) //данные из банка и договора
+             if (reader.HasRows) //данные из банка и договора
              {
-			// данные из таблицы договоры
-                 string number= dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                
+                while (reader.Read())
+                {
+                    if (a == 1)
+                    {
+                        var namepost = reader.GetValue(0).ToString(); //поставщик
+                        var contactpost = reader.GetValue(1).ToString();
+                        var pochtapost = reader.GetValue(2).ToString();
+                        var uridichpost = reader.GetValue(3).ToString();
+                        var INNpost = reader.GetValue(4).ToString();
+                        var kpppost = reader.GetValue(5).ToString();
+                        var raspost = reader.GetValue(6).ToString();
+                        var korpost = reader.GetValue(7).ToString();
+                        var bikPost = reader.GetValue(8).ToString();
+                        var bankpost = reader.GetValue(9).ToString();
+
+                        ReplaceWordStub("{namepostav}", namepost, wordDocument);
+                        ReplaceWordStub("{contactpostav}", contactpost, wordDocument);
+                        ReplaceWordStub("{bik.post}", bikPost, wordDocument);
+                        ReplaceWordStub("{kshet.post}", korpost, wordDocument);
+                        ReplaceWordStub("{rschet.post}", raspost, wordDocument);
+                        ReplaceWordStub("{bank.post}", bankpost, wordDocument);
+                        ReplaceWordStub("{kpp.post}", kpppost, wordDocument);
+                        ReplaceWordStub("{inn.post}", INNpost, wordDocument);
+                        ReplaceWordStub("{pocht.adr.post}", pochtapost, wordDocument);
+                        ReplaceWordStub("{yr.adr.post}", uridichpost, wordDocument);
+                    }
+                    else
+                    {
+                        var nameapteka = reader.GetValue(0).ToString();
+                        var contactapteka = reader.GetValue(1).ToString();
+                        var pochtaapteka = reader.GetValue(2).ToString();
+                        var uridichapteka = reader.GetValue(3).ToString();
+                        var INNapteka = reader.GetValue(4).ToString();
+                        var kppapteka = reader.GetValue(5).ToString();
+                        var rasapteka = reader.GetValue(6).ToString();
+                        var korapteka = reader.GetValue(7).ToString();
+                        var bikapteka = reader.GetValue(8).ToString();
+                        var bankapteka = reader.GetValue(9).ToString();
+
+                        ReplaceWordStub("{aptekaname}", nameapteka, wordDocument);
+                        ReplaceWordStub("{contactapteka}", contactapteka, wordDocument);
+                        ReplaceWordStub("{bik.apteka}", bikapteka, wordDocument);
+                        ReplaceWordStub("{kshet.apteka}", korapteka, wordDocument);
+                        ReplaceWordStub("{rschet.apteka}", rasapteka, wordDocument);
+                        ReplaceWordStub("{bank.apteka}", bankapteka, wordDocument);
+                        ReplaceWordStub("{kpp.apteka}", kppapteka, wordDocument);
+                        ReplaceWordStub("{inn.apteka}", INNapteka, wordDocument);
+                        ReplaceWordStub("{pocht.adr.apteka}", pochtaapteka, wordDocument);
+                        ReplaceWordStub("{yr.adr.apteka}", uridichapteka, wordDocument);
+                    }
+                    a++;
+                }
+                    // данные из таблицы договоры
+                    string number= dataGridView1.CurrentRow.Cells[0].Value.ToString();
                //  string adres = "г. " + city.ToString() + ", ул. " + street.ToString() + ", " + hn.ToString();
                 DateTime datezakluch = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());
 		        DateTime vozvrat= Convert.ToDateTime(dataGridView1.Rows[0].Cells[12].Value.ToString());
@@ -105,50 +159,8 @@ namespace vkr
 		string forsmajor=dataGridView1.CurrentRow.Cells[19].Value.ToString();
 		string peni=dataGridView1.CurrentRow.Cells[20].Value.ToString();
 		string nevozmozno=dataGridView1.CurrentRow.Cells[21].Value.ToString();
-               	 var namepost = reader.GetValue(0).ToString(); //поставщик
-                 var contactpost = reader.GetValue(1).ToString();
-                 var pochtapost = reader.GetValue(2).ToString();
-                var uridichpost = reader.GetValue(3).ToString();
-                var INNpost = reader.GetValue(4).ToString(); 
-                var kpppost = reader.GetValue(5).ToString();
-                var raspost = reader.GetValue(6).ToString();
-                var korpost = reader.GetValue(7).ToString();
-                var bikPost = reader.GetValue(8).ToString();
-                var bankpost = reader.GetValue(9).ToString();
-
-                // apteka
-                 var nameapteka = reader.GetValue(10).ToString();
-                 var contactapteka = reader.GetValue(11).ToString();
-                 var pochtaapteka = reader.GetValue(12).ToString();
-                 var uridichapteka = reader.GetValue(13).ToString();
-                 var INNapteka = reader.GetValue(14).ToString();
-                 var kppapteka = reader.GetValue(15).ToString();
-                 var rasapteka = reader.GetValue(16).ToString();
-                 var korapteka = reader.GetValue(17).ToString();
-                 var bikapteka = reader.GetValue(18).ToString();
-                 var bankapteka = reader.GetValue(19).ToString();
+			                 
                 //заполнение
-
-                /*ReplaceWordStub("{bik.apteka}", bikapteka, wordDocument);
-                ReplaceWordStub("{kshet.apteka}", korapteka, wordDocument);
-                ReplaceWordStub("{rschet.apteka}", rasapteka, wordDocument);
-                ReplaceWordStub("{bank.apteka}", bankapteka, wordDocument);
-                ReplaceWordStub("{kpp.apteka}", kppapteka, wordDocument);
-                ReplaceWordStub("{inn.apteka}", INNapteka, wordDocument);
-                ReplaceWordStub("{pocht.adr.apteka}", pochtaapteka, wordDocument); 
-                ReplaceWordStub("{yr.adr.apteka}", uridichapteka, wordDocument); 	*/
-
-                 ReplaceWordStub("{namepostav}", namepost, wordDocument);
-                 ReplaceWordStub("{contactpostav}", contactpost, wordDocument);
-                 ReplaceWordStub("{bik.post}", bikPost, wordDocument);
-                 ReplaceWordStub("{kshet.post}", korpost, wordDocument);
-                 ReplaceWordStub("{rschet.post}", raspost, wordDocument);
-                 ReplaceWordStub("{bank.post}", bankpost, wordDocument);
-                 ReplaceWordStub("{kpp.post}", kpppost, wordDocument);
-                 ReplaceWordStub("{inn.post}", INNpost, wordDocument);
-                 ReplaceWordStub("{pocht.adr.post}", pochtapost, wordDocument); 
-                 ReplaceWordStub("{yr.adr.post}", uridichpost, wordDocument); 
-
                  ReplaceWordStub("{number}", number, wordDocument);
                  ReplaceWordStub("{1%}", onepercent, wordDocument);   
                  ReplaceWordStub("{2%}", twopercent, wordDocument); 
