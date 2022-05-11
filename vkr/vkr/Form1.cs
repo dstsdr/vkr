@@ -34,7 +34,9 @@ namespace vkr
             int rows = dataGridView1.Rows.Count - 1;
             label1.Text = "Количество записей " + rows.ToString();
 
-            //DateTime date = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());
+           // DateTime date = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());
+            
+           // string d = date.ToString("D").Remove(0,3);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -140,6 +142,7 @@ namespace vkr
                     string number= dataGridView1.CurrentRow.Cells[0].Value.ToString();
                //  string adres = "г. " + city.ToString() + ", ул. " + street.ToString() + ", " + hn.ToString();
                 DateTime datezakluch = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());
+
 		        DateTime vozvrat= Convert.ToDateTime(dataGridView1.Rows[0].Cells[12].Value.ToString());
                 DateTime dogvordo = Convert.ToDateTime(dataGridView1.Rows[0].Cells[22].Value.ToString());
                 	// где вставка впихнуть Д datezakluch.ToString("D");
@@ -159,9 +162,14 @@ namespace vkr
 		string forsmajor=dataGridView1.CurrentRow.Cells[19].Value.ToString();
 		string peni=dataGridView1.CurrentRow.Cells[20].Value.ToString();
 		string nevozmozno=dataGridView1.CurrentRow.Cells[21].Value.ToString();
-			                 
+
                 //заполнение
-                 ReplaceWordStub("{number}", number, wordDocument);
+                ReplaceWordStub("{d}", datezakluch.ToString().Substring(0, 2), wordDocument);
+               // string date = datezakluch.ToString("D").Remove(0,3);
+                ReplaceWordStub("{date}", datezakluch.ToString("D").Remove(0, 3), wordDocument);
+
+
+                ReplaceWordStub("{number}", number, wordDocument);
                  ReplaceWordStub("{1%}", onepercent, wordDocument);   
                  ReplaceWordStub("{2%}", twopercent, wordDocument); 
                  ReplaceWordStub("{1day}", oneday, wordDocument); 
@@ -178,10 +186,11 @@ namespace vkr
                  ReplaceWordStub("{forsmajor}", forsmajor, wordDocument);  
                  ReplaceWordStub("{peni}", peni, wordDocument); 
                  ReplaceWordStub("{nevozmozno}", nevozmozno, wordDocument);   
-             
+                 ReplaceWordStub("{srokgodnosti}", srokGodnosti, wordDocument);   
 
-               //  ReplaceWordStub("{polnaya2}", ItogCreditSum.ToString("N2"), wordDocument);
-                 Connection.Close();
+
+                //  ReplaceWordStub("{polnaya2}", ItogCreditSum.ToString("N2"), wordDocument);
+                Connection.Close();
              }
 
              wordDocument.SaveAs(@"C:\Users\1652090\OneDrive\Рабочий стол\" + s + "");
