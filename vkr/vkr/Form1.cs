@@ -84,8 +84,7 @@ namespace vkr
              SqlCommand command = new SqlCommand(sqlExpression, Connection); 
              SqlDataReader reader = command.ExecuteReader();
              if (reader.HasRows) //данные из банка и договора
-             {
-                
+             {                
                 while (reader.Read())
                 {
                     if (a == 1)
@@ -135,6 +134,8 @@ namespace vkr
                         ReplaceWordStub("{inn.apteka}", INNapteka, wordDocument);
                         ReplaceWordStub("{pocht.adr.apteka}", pochtaapteka, wordDocument);
                         ReplaceWordStub("{yr.adr.apteka}", uridichapteka, wordDocument);
+                        ReplaceWordStub("{city}", uridichapteka.ToString().Substring(0, uridichapteka.IndexOf(" ул")), wordDocument);
+
                     }
                     a++;
                 }
@@ -165,11 +166,13 @@ namespace vkr
 
                 //заполнение
                 ReplaceWordStub("{d}", datezakluch.ToString().Substring(0, 2), wordDocument);
-               // string date = datezakluch.ToString("D").Remove(0,3);
                 ReplaceWordStub("{date}", datezakluch.ToString("D").Remove(0, 3), wordDocument);
+                ReplaceWordStub("{dvoz}", vozvrat.ToString().Substring(0, 2), wordDocument);
+                ReplaceWordStub("{datevoz}", vozvrat.ToString("D").Remove(0, 3), wordDocument);
+                ReplaceWordStub("{ddo}", dogvordo.ToString().Substring(0, 2), wordDocument);
+                ReplaceWordStub("{datedo}", dogvordo.ToString("D").Remove(0, 3), wordDocument);
 
-
-                ReplaceWordStub("{number}", number, wordDocument);
+                 ReplaceWordStub("{number}", number, wordDocument);
                  ReplaceWordStub("{1%}", onepercent, wordDocument);   
                  ReplaceWordStub("{2%}", twopercent, wordDocument); 
                  ReplaceWordStub("{1day}", oneday, wordDocument); 
