@@ -36,6 +36,10 @@
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -51,10 +55,7 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -99,12 +100,12 @@
             this.checkBox4.AutoSize = true;
             this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBox4.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.checkBox4.Location = new System.Drawing.Point(260, 93);
+            this.checkBox4.Location = new System.Drawing.Point(291, 93);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(256, 24);
+            this.checkBox4.Size = new System.Drawing.Size(265, 24);
             this.checkBox4.TabIndex = 143;
-            this.checkBox4.Text = "Незавершенные договоры";
+            this.checkBox4.Text = "Безрецептурные лекарства";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox5
@@ -115,9 +116,9 @@
             this.checkBox5.Location = new System.Drawing.Point(18, 93);
             this.checkBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(236, 24);
+            this.checkBox5.Size = new System.Drawing.Size(235, 24);
             this.checkBox5.TabIndex = 142;
-            this.checkBox5.Text = "Завершенные договоры";
+            this.checkBox5.Text = "Рецептурные лекарства";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // button10
@@ -156,8 +157,8 @@
             // dataGridView1
             // 
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
@@ -177,6 +178,38 @@
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(1504, 295);
             this.dataGridView1.TabIndex = 139;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Код характеристики";
+            this.Column1.HeaderText = "№";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 50;
+            // 
+            // column2
+            // 
+            this.column2.DataPropertyName = "Наименование";
+            this.column2.HeaderText = "Название";
+            this.column2.MinimumWidth = 6;
+            this.column2.Name = "column2";
+            this.column2.Width = 102;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "Условие отпуска";
+            this.Column3.HeaderText = "Условие отпуска";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 136;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Column4";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            this.Column4.Width = 88;
             // 
             // button7
             // 
@@ -349,8 +382,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(165, 43);
             this.button2.TabIndex = 125;
-            this.button2.Text = "Открыть документ";
+            this.button2.Text = "Похожее лекарство";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -367,43 +401,25 @@
             this.button1.Text = "Добавить договор";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // Column1
+            // checkBox7
             // 
-            this.Column1.DataPropertyName = "Код характеристики";
-            this.Column1.HeaderText = "№";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 50;
-            // 
-            // column2
-            // 
-            this.column2.DataPropertyName = "Наименование";
-            this.column2.HeaderText = "Название";
-            this.column2.MinimumWidth = 6;
-            this.column2.Name = "column2";
-            this.column2.Width = 102;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "Условие отпуска";
-            this.Column3.HeaderText = "Условие отпуска";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 136;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Column4";
-            this.Column4.MinimumWidth = 6;
-            this.Column4.Name = "Column4";
-            this.Column4.Visible = false;
-            this.Column4.Width = 88;
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox7.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.checkBox7.Location = new System.Drawing.Point(594, 93);
+            this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(95, 24);
+            this.checkBox7.TabIndex = 147;
+            this.checkBox7.Text = "ЖНВЛП";
+            this.checkBox7.UseVisualStyleBackColor = true;
             // 
             // katalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1541, 728);
+            this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -466,5 +482,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.CheckBox checkBox7;
     }
 }
