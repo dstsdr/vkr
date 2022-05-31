@@ -54,14 +54,14 @@ namespace vkr
 
         private void button9_Click(object sender, EventArgs e)
         {
-            int k = dataGridView1.CurrentRow.Index;
+           /* int k = dataGridView1.CurrentRow.Index;
             string s = dataGridView1[4, k].Value.ToString();
             Connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter("SELECT Клиенты.* FROM Клиенты INNER JOIN Договор ON Клиенты.ИНН = Договор.[ИНН клиента] WHERE Договор.[№]='" + s + "'", Connection);
             DataSet ds2 = new DataSet();
             adapter.Fill(ds2, "info");
             dataGridView2.DataSource = ds2.Tables[0];
-            Connection.Close();
+            Connection.Close();*/
         }
         private readonly string document = @"C:\Users\1652090\Downloads\shablon.docx";
 
@@ -206,5 +206,15 @@ namespace vkr
              range.Find.ClearFormatting();
              range.Find.Execute(FindText: stubToReplace, ReplaceWith: text);
          }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
