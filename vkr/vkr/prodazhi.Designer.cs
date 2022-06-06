@@ -1,6 +1,6 @@
 ﻿namespace vkr
 {
-    partial class katalog
+    partial class prodazhi
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -49,10 +49,17 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button2 = new System.Windows.Forms.Button();
-            this.checkBox7 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Код характеристики";
+            this.Column1.HeaderText = "№";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 50;
             // 
             // checkBox6
             // 
@@ -63,7 +70,7 @@
             this.checkBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(232, 24);
-            this.checkBox6.TabIndex = 146;
+            this.checkBox6.TabIndex = 167;
             this.checkBox6.Text = "Данные производителя";
             this.checkBox6.UseVisualStyleBackColor = true;
             // 
@@ -74,7 +81,7 @@
             this.button12.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(33, 26);
-            this.button12.TabIndex = 145;
+            this.button12.TabIndex = 166;
             this.button12.Text = ">";
             this.button12.UseVisualStyleBackColor = true;
             // 
@@ -85,7 +92,7 @@
             this.button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(33, 26);
-            this.button11.TabIndex = 144;
+            this.button11.TabIndex = 165;
             this.button11.Text = "<";
             this.button11.UseVisualStyleBackColor = true;
             // 
@@ -97,9 +104,9 @@
             this.checkBox4.Location = new System.Drawing.Point(291, 93);
             this.checkBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(265, 24);
-            this.checkBox4.TabIndex = 143;
-            this.checkBox4.Text = "Безрецептурные лекарства";
+            this.checkBox4.Size = new System.Drawing.Size(251, 24);
+            this.checkBox4.TabIndex = 164;
+            this.checkBox4.Text = "Безрецептурные продажи";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
             // checkBox5
@@ -110,9 +117,9 @@
             this.checkBox5.Location = new System.Drawing.Point(18, 93);
             this.checkBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(235, 24);
-            this.checkBox5.TabIndex = 142;
-            this.checkBox5.Text = "Рецептурные лекарства";
+            this.checkBox5.Size = new System.Drawing.Size(221, 24);
+            this.checkBox5.TabIndex = 163;
+            this.checkBox5.Text = "Рецептурные продажи";
             this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
@@ -135,15 +142,7 @@
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView1.Size = new System.Drawing.Size(1504, 295);
-            this.dataGridView1.TabIndex = 139;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Код характеристики";
-            this.Column1.HeaderText = "№";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 50;
+            this.dataGridView1.TabIndex = 162;
             // 
             // button7
             // 
@@ -152,7 +151,7 @@
             this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(33, 26);
-            this.button7.TabIndex = 138;
+            this.button7.TabIndex = 161;
             this.button7.Text = ">";
             this.button7.UseVisualStyleBackColor = true;
             // 
@@ -163,7 +162,7 @@
             this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(33, 26);
-            this.button8.TabIndex = 137;
+            this.button8.TabIndex = 160;
             this.button8.Text = "<";
             this.button8.UseVisualStyleBackColor = true;
             // 
@@ -179,7 +178,7 @@
             this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(157, 36);
-            this.button6.TabIndex = 136;
+            this.button6.TabIndex = 159;
             this.button6.Text = "Закрыть";
             this.button6.UseVisualStyleBackColor = false;
             // 
@@ -190,7 +189,7 @@
             this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(33, 26);
-            this.button5.TabIndex = 135;
+            this.button5.TabIndex = 158;
             this.button5.Text = "˅";
             this.button5.UseVisualStyleBackColor = true;
             // 
@@ -201,7 +200,7 @@
             this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(33, 26);
-            this.button4.TabIndex = 134;
+            this.button4.TabIndex = 157;
             this.button4.Text = "˄";
             this.button4.UseVisualStyleBackColor = true;
             // 
@@ -213,9 +212,9 @@
             this.label8.Location = new System.Drawing.Point(18, 16);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(158, 42);
-            this.label8.TabIndex = 128;
-            this.label8.Text = "Каталог";
+            this.label8.Size = new System.Drawing.Size(177, 42);
+            this.label8.TabIndex = 151;
+            this.label8.Text = "Продажи";
             // 
             // label1
             // 
@@ -224,7 +223,7 @@
             this.label1.Location = new System.Drawing.Point(1315, 103);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
-            this.label1.TabIndex = 133;
+            this.label1.TabIndex = 156;
             this.label1.Text = "label1";
             // 
             // button3
@@ -233,7 +232,7 @@
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(81, 34);
-            this.button3.TabIndex = 132;
+            this.button3.TabIndex = 155;
             this.button3.Text = "Поиск";
             this.button3.UseVisualStyleBackColor = true;
             // 
@@ -243,7 +242,7 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(879, 22);
-            this.textBox1.TabIndex = 131;
+            this.textBox1.TabIndex = 154;
             // 
             // checkBox3
             // 
@@ -254,7 +253,7 @@
             this.checkBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(150, 24);
-            this.checkBox3.TabIndex = 130;
+            this.checkBox3.TabIndex = 153;
             this.checkBox3.Text = "Данные банка";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -267,7 +266,7 @@
             this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(199, 24);
-            this.checkBox2.TabIndex = 129;
+            this.checkBox2.TabIndex = 152;
             this.checkBox2.Text = "Данные сотрудника";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
@@ -280,7 +279,7 @@
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(203, 24);
-            this.checkBox1.TabIndex = 127;
+            this.checkBox1.TabIndex = 150;
             this.checkBox1.Text = "Данные поставщика";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
@@ -301,7 +300,7 @@
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView2.Size = new System.Drawing.Size(1504, 128);
-            this.dataGridView2.TabIndex = 126;
+            this.dataGridView2.TabIndex = 149;
             // 
             // button2
             // 
@@ -315,30 +314,15 @@
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(165, 43);
-            this.button2.TabIndex = 125;
+            this.button2.TabIndex = 148;
             this.button2.Text = "Похожее лекарство";
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // checkBox7
-            // 
-            this.checkBox7.AutoSize = true;
-            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBox7.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.checkBox7.Location = new System.Drawing.Point(594, 93);
-            this.checkBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox7.Name = "checkBox7";
-            this.checkBox7.Size = new System.Drawing.Size(95, 24);
-            this.checkBox7.TabIndex = 147;
-            this.checkBox7.Text = "ЖНВЛП";
-            this.checkBox7.UseVisualStyleBackColor = true;
-            // 
-            // katalog
+            // prodazhi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1541, 728);
-            this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
@@ -359,9 +343,9 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.button2);
-            this.Name = "katalog";
-            this.Text = "katalog";
-            this.Load += new System.EventHandler(this.katalog_Load);
+            this.Name = "prodazhi";
+            this.Text = "prodazhi";
+            this.Load += new System.EventHandler(this.prodazhi_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
@@ -371,6 +355,7 @@
 
         #endregion
 
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button11;
@@ -391,7 +376,5 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

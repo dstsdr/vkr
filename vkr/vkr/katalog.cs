@@ -27,56 +27,26 @@ namespace vkr
         private void dataset()
         {
             Connection.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT [Характеристики лекарств].[Код характеристики],Лекарства.Наименование, [Условие отпуска].Условие  AS [Условие отпуска], " +
-                "[Фарм группа].Название AS [Фарм группа], [Форма выпуска].Форма  AS [Форма выпуска], " +
-                "Производитель.Наименование  AS [Производитель], [Характеристики лекарств].Дозировка, Договор.Количество, Лекарства.[Похожее лекарство], [Характеристики лекарств].[Срок годности]" +
-                " from[Характеристики лекарств] inner join (Лекарства inner join[Условие отпуска] ON" +
-                " Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] ON Лекарства.[Код группы] =[Фарм группа].[Код группы]) ON Лекарства.[Код лекарства] " +
-                "=[Характеристики лекарств].[Код лекарства] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON " +
-                "Производитель.[Код производителя] =[Характеристики лекарств].[Код производителя] inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора]", Connection);
+            SqlDataAdapter adapter = new SqlDataAdapter("SELECT COUNT([Серийный номер].[Код характеристики]) AS [Кол-во], Лекарства.Наименование, [Фарм группа].Название AS [Фарм группа], " +
+                "[Форма выпуска].Форма AS [Форма выпуска], Производитель.Наименование AS[Производитель], [Характеристики лекарств].Дозировка, Лекарства.[Похожее лекарство] from[Характеристики лекарств] " +
+                "inner join(Лекарства inner join[Условие отпуска] ON Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] ON Лекарства.[Код группы] =[Фарм группа].[Код группы]) " +
+                "ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель" +
+                " ON Производитель.[Код производителя] =[Характеристики лекарств].[Код производителя] inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] " +
+                "=[Серийный номер].[Код характеристики] where[Серийный номер].[Срок годности] > GETDATE() and[Код безрецептурной продажи] is null and [Код рецептурной продажи] is null " +
+                "GROUP BY[Характеристики лекарств].[Код характеристики], Лекарства.Наименование, [Фарм группа].Название, [Форма выпуска].Форма, Производитель.Наименование, " +
+                "[Характеристики лекарств].Дозировка, Лекарства.[Похожее лекарство]", Connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "info");
             dataGridView1.DataSource = ds.Tables[0];
             Connection.Close();
             int rows = dataGridView1.Rows.Count - 1;
             label1.Text = "Количество записей " + rows.ToString();
-            dataGridView1.Columns[9].Visible = false;
-            kolichestvo();
-            srokgodnosti();
+            dataGridView1.Columns[7].Visible = false;
+           // zvnlp();
         }
-        private void kolichestvo()
+        private void zvnlp()
         {
-            for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
-            {
-                if (dataGridView1.Rows[i].Cells[3].Value.ToString() == "Безрецептурное")
-                {
-                    Connection.Open();
-                    string sqlExpression = "SELECT [Безрецептурные продажи].Количество from [Безрецептурные продажи] WHERE [Безрецептурные продажи].[Код характеристики] ='" + dataGridView1.Rows[i].Cells[1].Value + "'";
-                    SqlCommand command = new SqlCommand(sqlExpression, Connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        dataGridView1.Rows[i].Cells[8].Value = Convert.ToInt32(dataGridView1.Rows[i].Cells[8].Value) - Convert.ToInt32(reader.GetValue(0));
-                    }
-                    Connection.Close();
-                }
-                else
-                {
-                    Connection.Open();
-                    string sqlExpression = "SELECT [Рецептурные продажи].Количество from [Рецептурные продажи] WHERE [Рецептурные продажи].[Код характеристики] = '" + dataGridView1.Rows[i].Cells[1].Value + "'";
-                    SqlCommand command = new SqlCommand(sqlExpression, Connection);
-                    SqlDataReader reader = command.ExecuteReader();
-                    if (reader.Read())
-                    {
-                        dataGridView1.Rows[i].Cells[8].Value = Convert.ToInt32(dataGridView1.Rows[i].Cells[8].Value) - Convert.ToInt32(reader.GetValue(0)); //
-                    }
-                    Connection.Close();
-                }
-            }
-        }
-        private void srokgodnosti()
-        {
-            bool a = false, b = false;
+          /*  bool a = false;
             for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
             {
                 DateTime dt = DateTime.Now;
@@ -86,8 +56,9 @@ namespace vkr
                     a=true;
                 }
             }
-            if (a==true) MessageBox.Show("В списке присутствуют просроченные товары");
+            if (a==true) MessageBox.Show("В списке присутствуют просроченные товары");*/
             //жвнлм
+            bool b=false;
             Connection.Open();
             string sqlExpression = "SELECT [Характеристики лекарств].[Код характеристики], [Необходимый минимум].[Код лекарства] from[Необходимый минимум] inner join[Характеристики лекарств] ON " +
                 "[Необходимый минимум].[Код лекарства] =[Характеристики лекарств].[Код лекарства]";
@@ -99,7 +70,7 @@ namespace vkr
                 {
                     if (Convert.ToInt32(dataGridView1.Rows[i].Cells[1].Value) == Convert.ToInt32(reader.GetValue(0)))
                     {
-                        if (Convert.ToInt32(dataGridView1.Rows[i].Cells[9].Value) <= 50) b = true;
+                        if (Convert.ToInt32(dataGridView1.Rows[i].Cells[9].Value) <= 1) b = true;
                         dataGridView1.Rows[i].DefaultCellStyle.BackColor = Color.Yellow;
 
                     }

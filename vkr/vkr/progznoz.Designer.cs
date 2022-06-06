@@ -86,9 +86,9 @@
             this.label8.Location = new System.Drawing.Point(18, 16);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(218, 42);
+            this.label8.Size = new System.Drawing.Size(304, 42);
             this.label8.TabIndex = 128;
-            this.label8.Text = "Статистика";
+            this.label8.Text = "Рекоммендации";
             // 
             // button3
             // 

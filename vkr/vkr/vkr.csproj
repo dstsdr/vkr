@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,6 +65,18 @@
     <Compile Include="katalog.Designer.cs">
       <DependentUpon>katalog.cs</DependentUpon>
     </Compile>
+    <Compile Include="prodazhi++.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prodazhi++.Designer.cs">
+      <DependentUpon>prodazhi++.cs</DependentUpon>
+    </Compile>
+    <Compile Include="prodazhi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="prodazhi.Designer.cs">
+      <DependentUpon>prodazhi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="progznoz.cs">
       <SubType>Form</SubType>
@@ -72,11 +85,38 @@
       <DependentUpon>progznoz.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="statistika.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="statistika.Designer.cs">
+      <DependentUpon>statistika.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tovar++.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tovar++.Designer.cs">
+      <DependentUpon>tovar++.cs</DependentUpon>
+    </Compile>
+    <Compile Include="tovar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tovar.Designer.cs">
+      <DependentUpon>tovar.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Dogovor++.resx">
+      <DependentUpon>Dogovor++.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="katalog.resx">
       <DependentUpon>katalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prodazhi++.resx">
+      <DependentUpon>prodazhi++.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prodazhi.resx">
+      <DependentUpon>prodazhi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="progznoz.resx">
       <DependentUpon>progznoz.cs</DependentUpon>
@@ -90,6 +130,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="statistika.resx">
+      <DependentUpon>statistika.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tovar++.resx">
+      <DependentUpon>tovar++.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="tovar.resx">
+      <DependentUpon>tovar.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
