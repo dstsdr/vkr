@@ -42,8 +42,9 @@ namespace vkr
             int rows = dataGridView1.Rows.Count - 1;
             label1.Text = "Количество записей " + rows.ToString();
             dataGridView1.Columns[7].Visible = false;
-           // zvnlp();
+            // zvnlp();
         }
+       
         private void zvnlp()
         {
           /*  bool a = false;
