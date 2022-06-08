@@ -150,22 +150,7 @@ namespace vkr
         }
 
         private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-           /* int n = checkedListBox3.Items.Count - 1;
-            Connection.Open();
-            SqlCommand cmd4 = Connection.CreateCommand();
-            cmd4.CommandType = CommandType.Text;
-            cmd4.CommandText = "select [Характеристики лекарств].[Код характеристики] AS ДА from[Характеристики лекарств] inner join[Серийный номер] ON" +
-                "[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] where[Серийный номер].[Серийный номер] =" + checkedListBox1.SelectedItem.ToString();
-            cmd4.ExecuteNonQuery();
-            DataTable dt4 = new DataTable();
-            SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
-            da4.Fill(dt4);
-            foreach (DataRow dr4 in dt4.Rows)
-            {
-                checkedListBox1.Items.Add(dr4["ДА"].ToString());
-            }
-            Connection.Close();*/
+        {           
             for (int i = 0; i < checkedListBox3.Items.Count; i++)
             {
                 if (checkedListBox3.GetItemChecked(i))
@@ -225,14 +210,34 @@ namespace vkr
                                     {
                                         dataGridView1[2, j].Value = words[2];
                                     }
+                                    else dataGridView1[2, j].Value = "0%";
                                 }
                             }
-
                         }
                     }                    
                 }
             }
-
+            Connection.Open();
+            for (int i= 0; i<dataGridView1.RowCount-1; i++)
+            {
+                SqlCommand cmd4 = Connection.CreateCommand();
+                cmd4.CommandType = CommandType.Text;
+                cmd4.CommandText = "SELECT [Характеристики лекарств].Цена AS ЦЕНА from [Характеристики лекарств] where [Характеристики лекарств].[Код характеристики] =" + dataGridView1[0, i].Value.ToString();
+                cmd4.ExecuteNonQuery();
+                DataTable dt4 = new DataTable();
+                SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+                da4.Fill(dt4);
+                foreach (DataRow dr4 in dt4.Rows)
+                {
+                    dataGridView1[3, i].Value = dr4["ЦЕНА"].ToString();
+                    if (dataGridView1[2, i].Value.ToString() != "0")
+                    {
+                        dataGridView1[3, i].Value = Convert.ToDecimal(dataGridView1[3, i].Value) - (Convert.ToDecimal(dataGridView1[3, i].Value) * (Convert.ToDecimal(dataGridView1[2, i].Value.ToString().Substring(0, dataGridView1[2, i].Value.ToString().Length - 1)) / 100));
+                        dataGridView1[3, i].Value = Convert.ToDecimal(dataGridView1[3, i].Value) * Convert.ToDecimal(dataGridView1[1, i].Value);
+                    }
+                }
+            }
+            Connection.Close();            
         }
 
         private void checkedListBox2_SelectedIndexChanged(object sender, EventArgs e)
