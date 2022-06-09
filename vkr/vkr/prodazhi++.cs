@@ -40,6 +40,7 @@ namespace vkr
 
         private void checkBox5_CheckedChanged(object sender, EventArgs e)
         {
+            if (checkBox5.Checked == true) bezrecepttovar();
             groupBox4MK.Visible = false;
             groupBox3.Visible = false;
             groupBox2.Visible = false;
@@ -53,6 +54,36 @@ namespace vkr
             checkBox5.Visible = false;
             this.Height = 330;
 
+        }
+        private void bezrecepttovar ()
+        {
+            checkedListBox3.Items.Clear();
+            Connection.Open();
+            SqlCommand cmd4 = Connection.CreateCommand();
+            cmd4.CommandType = CommandType.Text;
+            cmd4.CommandText = "SELECT CONCAT ([Характеристики лекарств].[Код характеристики] , ' ',Лекарства.Наименование, ' ', " +
+                "[Характеристики лекарств].Дозировка, SUBSTRING([Единицы измерения].Обозначение, 1, CHARINDEX(' ', " +
+                "[Единицы измерения].Обозначение) - 1),' ', [Форма выпуска].Форма, ' ', Производитель.Наименование) as ДА " +
+                "from[Характеристики лекарств] inner join(Лекарства inner join[Условие отпуска] ON [Условие отпуска].[Код условия]= " +
+                "Лекарства.[Код условия]) ON Лекарства.[Код лекарства] = [Характеристики лекарств].[Код лекарства] inner join" +
+                "([Форма выпуска] inner join [Единицы измерения] ON [Единицы измерения].[Код ед.изм]=[Форма выпуска].[Код ед.изм]) " +
+                "ON[Форма выпуска].[Код формы] = [Характеристики лекарств].[Код формы] inner join Производитель ON " +
+                "Производитель.[Код производителя] = [Характеристики лекарств].[Код производителя] inner join[Серийный номер] ON" +
+                "[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] WHERE" +
+                "[Серийный номер].[Код рецептурной продажи] is null and [Серийный номер].[Код безрецептурной продажи] is null and " +
+                "[Условие отпуска].[Код условия] = 2 GROUP BY [Характеристики лекарств].Дозировка, Производитель.Наименование , " +
+                "[Характеристики лекарств].Наценка, Лекарства.Наименование, [Форма выпуска].Форма, " +
+                "[Характеристики лекарств].[Номер договора], [Единицы измерения].Обозначение, [Характеристики лекарств].[Код характеристики]" +
+                " ORDER BY ДА ASC";
+            cmd4.ExecuteNonQuery();
+            DataTable dt4 = new DataTable();
+            SqlDataAdapter da4 = new SqlDataAdapter(cmd4);
+            da4.Fill(dt4);
+            foreach (DataRow dr4 in dt4.Rows)
+            {
+                checkedListBox3.Items.Add(dr4["ДА"].ToString());
+            }
+            Connection.Close();
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -75,6 +106,7 @@ namespace vkr
 
         private void recepttovar()
         {
+            checkedListBox3.Items.Clear();
             Connection.Open();
             SqlCommand cmd4 = Connection.CreateCommand();
             cmd4.CommandType = CommandType.Text;
@@ -276,6 +308,11 @@ namespace vkr
         }
 
         private void prodazhi___Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
