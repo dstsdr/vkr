@@ -71,12 +71,12 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Скидка = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Сумма = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1MZ.SuspendLayout();
@@ -268,7 +268,7 @@
             this.groupBox2.Controls.Add(this.label20);
             this.groupBox2.Controls.Add(this.FirstName);
             this.groupBox2.Controls.Add(this.label19);
-            this.groupBox2.Location = new System.Drawing.Point(23, 359);
+            this.groupBox2.Location = new System.Drawing.Point(23, 343);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(470, 174);
             this.groupBox2.TabIndex = 124;
@@ -375,7 +375,7 @@
             // 
             this.groupBox3.Controls.Add(this.textBox4);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(23, 539);
+            this.groupBox3.Location = new System.Drawing.Point(23, 523);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(470, 57);
             this.groupBox3.TabIndex = 125;
@@ -428,7 +428,7 @@
             this.groupBox1MZ.Controls.Add(this.label2);
             this.groupBox1MZ.Controls.Add(this.textBox3);
             this.groupBox1MZ.Controls.Add(this.label3);
-            this.groupBox1MZ.Location = new System.Drawing.Point(23, 603);
+            this.groupBox1MZ.Location = new System.Drawing.Point(499, 343);
             this.groupBox1MZ.Name = "groupBox1MZ";
             this.groupBox1MZ.Size = new System.Drawing.Size(470, 171);
             this.groupBox1MZ.TabIndex = 127;
@@ -443,7 +443,7 @@
             this.groupBox4MK.Controls.Add(this.label11);
             this.groupBox4MK.Controls.Add(this.textBox6);
             this.groupBox4MK.Controls.Add(this.label13);
-            this.groupBox4MK.Location = new System.Drawing.Point(23, 603);
+            this.groupBox4MK.Location = new System.Drawing.Point(499, 343);
             this.groupBox4MK.Name = "groupBox4MK";
             this.groupBox4MK.Size = new System.Drawing.Size(470, 122);
             this.groupBox4MK.TabIndex = 126;
@@ -556,66 +556,77 @@
             this.label16.TabIndex = 9;
             this.label16.Text = "Серийный номер";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Скидка,
-            this.Сумма});
-            this.dataGridView1.Location = new System.Drawing.Point(487, 61);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(554, 150);
-            this.dataGridView1.TabIndex = 142;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Товар";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Кол-во";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Скидка
-            // 
-            this.Скидка.HeaderText = "Скидка";
-            this.Скидка.MinimumWidth = 6;
-            this.Скидка.Name = "Скидка";
-            this.Скидка.Width = 125;
-            // 
-            // Сумма
-            // 
-            this.Сумма.HeaderText = "Сумма";
-            this.Сумма.MinimumWidth = 6;
-            this.Сумма.Name = "Сумма";
-            this.Сумма.Width = 125;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(543, 261);
+            this.button1.Location = new System.Drawing.Point(908, 290);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(129, 42);
             this.button1.TabIndex = 143;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridView1.Location = new System.Drawing.Point(499, 64);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 0, 2);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridView1.Size = new System.Drawing.Size(541, 209);
+            this.dataGridView1.TabIndex = 163;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Код характеристики";
+            this.Column1.HeaderText = "Товар";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 77;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Количество";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 114;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Скидка";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 83;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Сумма";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 79;
+            // 
             // prodazhi__
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1078, 361);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1049, 605);
             this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -627,6 +638,7 @@
             this.Controls.Add(this.groupBox1MZ);
             this.Name = "prodazhi__";
             this.Text = "prodazhi__";
+            this.Load += new System.EventHandler(this.prodazhi___Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -688,11 +700,11 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Скидка;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Сумма;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }

@@ -142,15 +142,39 @@ namespace vkr
 
         private void checkedListBox3_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            string name = checkedListBox3.SelectedItem.ToString();
-            string[] words = name.Split(' ');
-            string id = words[0];
-            seriya(id);
-            skidki(id);            
-        }
+            if (e.NewValue == CheckState.Checked)
+            {
+                string name = checkedListBox3.SelectedItem.ToString();
+                string[] words = name.Split(' ');
+                string id = words[0];
+                seriya(id);
+                skidki(id);
+            }
+            else
+            {
+                checkedListBox1.Items.Clear();
+                checkedListBox1.Items.Add("Добавить серийный номер");
+                checkedListBox2.Items.Clear();
+                checkedListBox2.Items.Add("Добавить скидку");
 
+                for (int i = 0; i < checkedListBox3.Items.Count; i++)
+                {
+                    if (i != Convert.ToInt32(checkedListBox3.SelectedIndex))
+                    {
+                        if (checkedListBox3.GetItemChecked(i)) // работает только с кнопкой
+                        {
+                            string id = (checkedListBox3.Items[i]).ToString().Remove(checkedListBox3.Items[i].ToString().IndexOf(' '));
+                            seriya(id);
+                            skidki(id);
+                        }
+                    }
+                }
+            }
+
+        }
         private void checkedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
-        {           
+        {
+            dataGridView1.Rows.Clear();
             for (int i = 0; i < checkedListBox3.Items.Count; i++)
             {
                 if (checkedListBox3.GetItemChecked(i))
@@ -187,6 +211,7 @@ namespace vkr
                  }
              }            
             Connection.Close();
+           // rashet();
         }
         private void rashet ()
         {
@@ -247,7 +272,12 @@ namespace vkr
 
         private void button1_Click(object sender, EventArgs e)
         {
-            rashet();
+            rashet();          
+        }
+
+        private void prodazhi___Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
