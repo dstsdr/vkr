@@ -16,7 +16,7 @@ namespace vkr
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new tovar__());
+            Application.Run(new Form1());
         }
     }
 }
