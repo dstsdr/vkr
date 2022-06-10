@@ -44,6 +44,7 @@ namespace vkr
                 comboBox9.Text = (dr4["НАЦЕНКА"].ToString());
                 comboBox6.Text = (dr4["ФАРМ"].ToString());
             }
+            Connection.Close();
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
@@ -156,7 +157,258 @@ namespace vkr
             {
                 comboBox5.Items.Add(dr8["Дозировка"].ToString());
             }
+            SqlCommand cmd9 = Connection.CreateCommand();
+            cmd9.CommandType = CommandType.Text;
+            cmd9.CommandText = "SELECT НДС.Проценты from НДС order by НДС.Проценты asc";
+            cmd9.ExecuteNonQuery();
+            DataTable dt9 = new DataTable();
+            SqlDataAdapter da9 = new SqlDataAdapter(cmd9);
+            da9.Fill(dt9);
+            foreach (DataRow dr9 in dt9.Rows)
+            {
+                comboBox10.Items.Add(dr9["Проценты"].ToString());
+            }
             Connection.Close();
+        }
+        private int lsadd ()
+        {
+            int y, n, f;
+            //добавление лекарства            
+                Connection.Open();
+                SqlCommand cmd8 = Connection.CreateCommand();
+                cmd8.CommandType = CommandType.Text;
+                cmd8.CommandText = "SELECT [Условие отпуска].[Код условия] AS Условие, Наценка.[Код наценки] AS Наценка, " +
+                     "[Фарм группа].[Код группы]  AS Фарм " +
+                     "from[Условие отпуска], Наценка, [Фарм группа] where [Условие отпуска].Условие = '" + comboBox7.Text + "' and" +
+                     " Наценка.Наценка = " + comboBox9.Text + " and [Фарм группа].Название = '" + comboBox6.Text + "'"; //получили id */
+                cmd8.ExecuteNonQuery();
+                DataTable dt8 = new DataTable();
+                SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
+                da8.Fill(dt8);
+                y = Convert.ToInt32(dt8.Rows[0]["Условие"]);
+                f = Convert.ToInt32(dt8.Rows[0]["Фарм"]);
+                n = Convert.ToInt32(dt8.Rows[0]["Наценка"]);
+                SqlCommand command = new SqlCommand("insert into [Лекарства]([Наименование],[Код условия], [Код наценки], [Код группы]) Values" +
+                " (@date, @number, @OSN, @PERCENT, @OST,@nol)", Connection); //добавили лекарство
+                command.Parameters.AddWithValue("@number", textBox1.Text);
+                command.Parameters.AddWithValue("@OSN", y);
+                command.Parameters.AddWithValue("@PERCENT", n);
+                command.Parameters.AddWithValue("@OST", f);
+                command.ExecuteNonQuery();
+                int id=0;
+            // ищем максимальный id,и возвращаем
+                return id;
+                Connection.Close();
+            
+        }
+        private int lskod()
+        {
+            int l;
+            //получение кода лекарства            
+            Connection.Open();
+            SqlCommand cmd8 = Connection.CreateCommand();
+            cmd8.CommandType = CommandType.Text;
+            cmd8.CommandText = "SELECT Лекарства.[Код лекарства] AS Код from Лекарства WHERE Лекарства.Наименование = '" + comboBox1.Text + "'";
+            cmd8.ExecuteNonQuery();
+            DataTable dt8 = new DataTable();
+            SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
+            da8.Fill(dt8);
+            l = Convert.ToInt32(dt8.Rows[0]["Код"]);
+            Connection.Close();
+            return l;
+        }
+       /* private int xaracteristiki ()
+        {
+            /* n, f;
+            Connection.Open(); //получаем ид характеристики
+            SqlCommand cmd = Connection.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT [Характеристики лекарств].[Код характеристики] AS КодХ from[Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] " +
+                "=[Характеристики лекарств].[Код лекарства] inner join Производитель ON Производитель.[Код производителя] =" +
+                "[Характеристики лекарств].[Код производителя] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
+                "inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора] " +
+                "Where[Характеристики лекарств].Цена = " + comboBox8.Text + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
+                "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +
+                "AND Лекарства.Наименование = '" + comboBox1.Text + "'"; //получили id 
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            if (dt.Rows.Count == 0) // добавляем характеристики 
+            {
+                SqlCommand command = new SqlCommand("insert into [Характеристики лекарств]([Номер договора], [Код НДС], [Код лекарства], [Код формы]" +
+                    " [Дозировка],[Цена],[Код производителя],[Наценка] ) Values" +
+                               " (@date, @number, @OSN, @PERCENT, @OST,@nol)", Connection); //добавили лекарство
+                command.Parameters.AddWithValue("@number", textBox1.Text);
+                command.Parameters.AddWithValue("@OSN", y);
+                command.Parameters.AddWithValue("@PERCENT", n);
+                command.Parameters.AddWithValue("@OST", f);
+                command.ExecuteNonQuery();
+                Connection.Close();
+                return 0;
+            }
+            else
+            {
+                int  x = Convert.ToInt32(dt.Rows[0]["КодХ"]); //получаем код
+                Connection.Close();
+                return x; 
+            }
+        }*/
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int x=0, l=0, y=0, n=0, f=0;
+            //++ ls
+            if (comboBox1.SelectedIndex == 0)
+            {
+                //добавление лекарства            
+                Connection.Open();
+                SqlCommand cmd8 = Connection.CreateCommand();
+                cmd8.CommandType = CommandType.Text;
+                cmd8.CommandText = "SELECT [Условие отпуска].[Код условия] AS Условие, Наценка.[Код наценки] AS Наценка, " +
+                     "[Фарм группа].[Код группы]  AS Фарм " +
+                     "from[Условие отпуска], Наценка, [Фарм группа] where [Условие отпуска].Условие = '" + comboBox7.Text + "' and" +
+                     " Наценка.Наценка = " + comboBox9.Text + " and [Фарм группа].Название = '" + comboBox6.Text + "'"; //получили id */
+                cmd8.ExecuteNonQuery();
+                DataTable dt8 = new DataTable();
+                SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
+                da8.Fill(dt8);
+                y = Convert.ToInt32(dt8.Rows[0]["Условие"]);
+                f = Convert.ToInt32(dt8.Rows[0]["Фарм"]);
+                n = Convert.ToInt32(dt8.Rows[0]["Наценка"]);
+                SqlCommand command = new SqlCommand("insert into [Лекарства]([Наименование],[Код условия], [Код наценки], [Код группы]) Values" +
+                " (@number, @OSN, @PERCENT, @OST)", Connection); //добавили лекарство
+                command.Parameters.AddWithValue("@number", textBox1.Text);
+                command.Parameters.AddWithValue("@OSN", y);
+                command.Parameters.AddWithValue("@PERCENT", n);
+                command.Parameters.AddWithValue("@OST", f);
+                command.ExecuteNonQuery();
+                SqlCommand cmd6 = Connection.CreateCommand();
+                cmd6.CommandType = CommandType.Text;
+                cmd6.CommandText = "SELECT  MAX(Лекарства.[Код лекарства]) AS id from Лекарства"; //получили мах id */
+                cmd6.ExecuteNonQuery();
+                DataTable dt6 = new DataTable();
+                SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
+                da6.Fill(dt6);
+                l= Convert.ToInt32(dt6.Rows[0]["id"]);
+            }                                    
+            if (comboBox1.SelectedIndex != 0) // получили код лекарства
+            {
+                SqlCommand cmd8 = Connection.CreateCommand();
+                cmd8.CommandType = CommandType.Text;
+                cmd8.CommandText = "SELECT Лекарства.[Код лекарства] AS Код from Лекарства WHERE Лекарства.Наименование = '" + comboBox1.Text + "'";
+                cmd8.ExecuteNonQuery();
+                DataTable dt8 = new DataTable();
+                SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
+                da8.Fill(dt8);
+                l = Convert.ToInt32(dt8.Rows[0]["Код"]);
+            }
+            SqlCommand cmd = Connection.CreateCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = "SELECT [Характеристики лекарств].[Код характеристики] AS КодХ from[Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] " +
+                "=[Характеристики лекарств].[Код лекарства] inner join Производитель ON Производитель.[Код производителя] =" +
+                "[Характеристики лекарств].[Код производителя] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
+                "inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора] " +
+                "Where[Характеристики лекарств].Цена = " + comboBox8.Text + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
+                "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +
+                "AND Лекарства.Наименование = '" + comboBox1.Text + "'"; //получили id */
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            if (dt.Rows.Count == 0) // добавляем характеристики 
+            {
+                Connection.Open();
+                SqlCommand cmd8 = Connection.CreateCommand();
+                cmd8.CommandType = CommandType.Text;
+                cmd8.CommandText = "SELECT Производитель.[Код производителя] AS Произв, [Форма выпуска].[Код формы] AS Форма from Производитель, [Форма выпуска] " +
+                    "WHERE Производитель.Наименование = '" + comboBox2.Text + "' and [Форма выпуска].Форма = '" + comboBox3.Text+"'"; //получили id */
+                cmd8.ExecuteNonQuery();
+                DataTable dt8 = new DataTable();
+                SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
+                da8.Fill(dt8);
+               // y = Convert.ToInt32(dt8.Rows[0]["Произв"]);
+               // f = Convert.ToInt32(dt8.Rows[0]["Форма"]);
+                SqlCommand command = new SqlCommand("insert into [Характеристики лекарств]([Номер договора], [Код НДС], [Код лекарства], [Код формы]" +
+                    " [Дозировка],[Цена],[Код производителя],[Наценка] ) Values" +
+                               " (@number, @OSN, @ls, @forma,@doz, @cost, @proizv, @nacen)", Connection); //добавили Характеристику
+                command.Parameters.AddWithValue("@number", Convert.ToInt32(comboBox4.Text));
+                command.Parameters.AddWithValue("@OSN", y);
+                command.Parameters.AddWithValue("@ls", l);
+                command.Parameters.AddWithValue("@forma", Convert.ToInt32(dt8.Rows[0]["Форма"]));
+                command.Parameters.AddWithValue("@doz", Convert.ToInt32(comboBox5.Text));
+                command.Parameters.AddWithValue("@cost", Convert.ToDecimal(comboBox8.Text));
+                command.Parameters.AddWithValue("@proizv", Convert.ToInt32(dt8.Rows[0]["Произв"]));
+                command.Parameters.AddWithValue("@nacen", Convert.ToInt32(textBox2.Text));
+                command.ExecuteNonQuery();
+                // ищем макс ид
+                SqlCommand cmd7 = Connection.CreateCommand();
+                cmd7.CommandType = CommandType.Text;
+                cmd7.CommandText = "SELECT  MAX([Характеристики лекарств].[Код характеристики]) AS id from  [Характеристики лекарств]"; //получили id */
+                cmd7.ExecuteNonQuery();
+                DataTable dt7 = new DataTable();
+                SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
+                da7.Fill(dt7);
+                x = Convert.ToInt32(dt7.Rows[0]["id"]);
+            }
+            else
+            {
+                x = Convert.ToInt32(dt.Rows[0]["КодХ"]); //получаем код
+            }
+
+            SqlCommand command1 = new SqlCommand("insert into [Серийный номер]([Серийный номер], [Срок годности], [Код характеристики]) Values" +
+                              " (@number, @srok, @kodx)", Connection); //добавили Характеристику
+            command1.Parameters.AddWithValue("@number", Convert.ToInt32(LastName.Text));
+            command1.Parameters.AddWithValue("@srok", dateTimePicker2.Value.ToString("dd'.'MM'.'yyyy"));
+            command1.Parameters.AddWithValue("@kodx", x);
+            command1.ExecuteNonQuery();
+            Connection.Close();
+        }
+
+        private void textBox2_Validated(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            if (textBox2.Text!="" && comboBox4.SelectedIndex>0 && comboBox10.SelectedIndex>0)
+            {
+                cost();
+            }            
+        }
+        private void cost ()
+        {
+            Connection.Open();
+            SqlCommand cmd7 = Connection.CreateCommand();
+            cmd7.CommandType = CommandType.Text;
+            int nacenka = Convert.ToInt32(textBox2.Text);
+            cmd7.CommandText = "SELECT (((((Договор.Сумма*((НДС.Проценты)/100))/Договор.Количество)+(((Договор.Сумма*((НДС.Проценты)/100))/Договор.Количество)* " +
+            "(" + nacenka + " / 100))))*0.1)+((Договор.Сумма * ((НДС.Проценты) / 100)) / Договор.Количество) * (" + nacenka + " / 100) + (Договор.Сумма * ((НДС.Проценты) / 100)) / " +
+            "Договор.Количество AS SUMM from Договор inner join НДС ON Договор.НДС = НДС.[Код НДС] inner join [Характеристики лекарств] ON " +
+            "[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
+            "WHERE НДС.Проценты = " + comboBox10.Text + " and Договор.[Номер договора]=" + comboBox4.Text; //получили id */
+            cmd7.ExecuteNonQuery();
+            DataTable dt7 = new DataTable();
+            SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
+            da7.Fill(dt7);
+            comboBox8.Text = (dt7.Rows[0]["SUMM"]).ToString();
+            Connection.Close();
+        }
+
+        private void comboBox10_Leave(object sender, EventArgs e)
+        {
+            if (textBox2.Text != "" && comboBox4.SelectedIndex > 0 && comboBox10.SelectedIndex > 0)
+            {
+                cost();
+            }
+        }
+
+        private void comboBox4_Leave(object sender, EventArgs e)
+        {
+            if (textBox2.Text != "" && comboBox4.SelectedIndex > 0 && comboBox10.SelectedIndex > 0)
+            {
+                cost();
+            }
         }
     }
 }

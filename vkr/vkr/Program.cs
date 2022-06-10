@@ -16,7 +16,7 @@ namespace vkr
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new progznoz());
+            Application.Run(new tovar__());
         }
     }
 }

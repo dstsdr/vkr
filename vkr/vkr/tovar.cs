@@ -86,5 +86,11 @@ namespace vkr
                     a++;
                 }*/
             }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tovar__ frm2 = new tovar__();           
+            frm2.Show();
+        }
     }
 }
