@@ -74,13 +74,11 @@ namespace vkr
             Connection.Open();
             SqlCommand cmd8 = Connection.CreateCommand();
             cmd8.CommandType = CommandType.Text;
-            cmd8.CommandText = "S "; //получили id */
+            cmd8.CommandText = "SELECT НДС.[Код НДС] from НДС  where НДС.Проценты="+Convert.ToInt32(comboBox3.Text); //получили id */
             cmd8.ExecuteNonQuery();
             DataTable dt8 = new DataTable();
             SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
             da8.Fill(dt8);
-           // y = Convert.ToInt32(dt8.Rows[0]["Условие"]); найти ид ндс
-
             SqlCommand command = new SqlCommand("insert into [Договор]([Дата заключения],[Сумма],[Код сотрудника],[ИНН поставщика],[НДС]," +
                 "[Срок оплаты],[Срок годности %],[повреждений вторичной упаковки ],[Рассмотрение претензии],[Скрытые недостатки в течении]," +
                 "[Скрытые недостатки не поздее],[Возврат до],[Неустойка],[Процент первой поставки],[Процент второй поставки],[Срок первой поставки]," +
@@ -90,9 +88,9 @@ namespace vkr
                 "@%1 , @%2 , @srok1 , @srok2 , @dop , @forsmajor , @peni , @nevozmojno , @do , @kolvo)", Connection);
             command.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("dd'.'MM'.'yyyy")); 
             command.Parameters.AddWithValue("@summ", textBox1.Text);
-           // command.Parameters.AddWithValue("@sotr", textBox1.Text);
-            command.Parameters.AddWithValue("@inn", comboBox2.Text); 
-          //  command.Parameters.AddWithValue("@nds", textBox1.Text);
+            command.Parameters.AddWithValue("@sotr", comboBox1.Text.Substring(0, comboBox1.Text.IndexOf(' ')));
+            command.Parameters.AddWithValue("@inn", comboBox2.Text);
+            command.Parameters.AddWithValue("@nds", Convert.ToInt32(dt8.Rows[0]["Проценты"]));
             command.Parameters.AddWithValue("@oplata", textBox2.Text);
             command.Parameters.AddWithValue("@goden", textBox3.Text);
             command.Parameters.AddWithValue("@vtorich", textBox4.Text);

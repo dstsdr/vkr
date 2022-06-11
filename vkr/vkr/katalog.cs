@@ -105,5 +105,13 @@ namespace vkr
           //  int rows = dataGridView1.Rows.Count - 1;
            // label1.Text = "Количество записей " + rows.ToString();//9
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            prodazhi__ frm2 = new prodazhi__();
+            //  frm2.save.Visible = false;
+            // frm2.button1.Visible = true;
+            frm2.Show();
+        }
     }
 }
