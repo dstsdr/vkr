@@ -257,11 +257,13 @@ namespace vkr
         private void button1_Click(object sender, EventArgs e)
         {
             int x=0, l=0, y=0, n=0, f=0;
+
+            Connection.Open();
             //++ ls
             if (comboBox1.SelectedIndex == 0)
             {
                 //добавление лекарства            
-                Connection.Open();
+               // Connection.Open();
                 SqlCommand cmd8 = Connection.CreateCommand();
                 cmd8.CommandType = CommandType.Text;
                 cmd8.CommandText = "SELECT [Условие отпуска].[Код условия] AS Условие, Наценка.[Код наценки] AS Наценка, " +
@@ -308,7 +310,7 @@ namespace vkr
                 "=[Характеристики лекарств].[Код лекарства] inner join Производитель ON Производитель.[Код производителя] =" +
                 "[Характеристики лекарств].[Код производителя] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
                 "inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора] " +
-                "Where[Характеристики лекарств].Цена = " + comboBox8.Text + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
+                "Where[Характеристики лекарств].Цена = " + comboBox8.Text.Replace(',','.') + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
                 "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +
                 "AND Лекарства.Наименование = '" + comboBox1.Text + "'"; //получили id */
             cmd.ExecuteNonQuery();
@@ -336,7 +338,7 @@ namespace vkr
                 command.Parameters.AddWithValue("@ls", l);
                 command.Parameters.AddWithValue("@forma", Convert.ToInt32(dt8.Rows[0]["Форма"]));
                 command.Parameters.AddWithValue("@doz", Convert.ToInt32(comboBox5.Text));
-                command.Parameters.AddWithValue("@cost", Convert.ToDecimal(comboBox8.Text));
+                command.Parameters.AddWithValue("@cost", (comboBox8.Text));
                 command.Parameters.AddWithValue("@proizv", Convert.ToInt32(dt8.Rows[0]["Произв"]));
                 command.Parameters.AddWithValue("@nacen", Convert.ToInt32(textBox2.Text));
                 command.ExecuteNonQuery();
@@ -391,7 +393,8 @@ namespace vkr
             DataTable dt7 = new DataTable();
             SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
             da7.Fill(dt7);
-            comboBox8.Text = (dt7.Rows[0]["SUMM"]).ToString();
+            double cost = Math.Round((Convert.ToDouble((dt7.Rows[0]["SUMM"]).ToString())),3);
+            comboBox8.Text = cost.ToString();
             Connection.Close();
         }
 

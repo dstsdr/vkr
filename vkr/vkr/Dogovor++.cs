@@ -66,6 +66,19 @@ namespace vkr
             {
                 comboBox1.Items.Add(dr2["sotr"].ToString());
             }
+            SqlCommand cmd1 = Connection.CreateCommand();
+            cmd1.CommandType = CommandType.Text;
+            cmd1.CommandText = "SELECT CONCAT (Лекарства.Наименование, ' ', [Форма выпуска].Форма,' ', [Характеристики лекарств].Дозировка,' ', [Единицы измерения].Обозначение) as s " +
+                "from[Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства] " +
+                "inner join([Форма выпуска] inner join [Единицы измерения] ON[Единицы измерения].[Код ед.изм]=[Форма выпуска].[Код ед.изм]) ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы]";
+            cmd1.ExecuteNonQuery();
+            DataTable dt1 = new DataTable();
+            SqlDataAdapter da1 = new SqlDataAdapter(cmd1);
+            da1.Fill(dt1);
+            foreach (DataRow dr1 in dt1.Rows)
+            {
+                comboBox4.Items.Add(dr1["s"].ToString());
+            }
             Connection.Close();
         }
 
@@ -74,7 +87,7 @@ namespace vkr
             Connection.Open();
             SqlCommand cmd8 = Connection.CreateCommand();
             cmd8.CommandType = CommandType.Text;
-            cmd8.CommandText = "SELECT НДС.[Код НДС] from НДС  where НДС.Проценты="+Convert.ToInt32(comboBox3.Text); //получили id */
+            cmd8.CommandText = "SELECT НДС.[Код НДС] as Проценты from НДС  where НДС.Проценты="+Convert.ToInt32(comboBox3.Text); //получили id */
             cmd8.ExecuteNonQuery();
             DataTable dt8 = new DataTable();
             SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
@@ -85,7 +98,7 @@ namespace vkr
                 "[Срок второй поставки],[Срок доп.заявок],[Срок информирование о форс-мажоре],[Пени],[Информирование в случае невозможности поставки]," +
                 "[Действие договора до],[Количество]) Values" +
                 " (@data, @summ, @sotr, @inn, @nds , @oplata , @goden , @vtorich , @pretenziya , @vtechenii , @nepozdnee , @vozvrat , @neust , " +
-                "@%1 , @%2 , @srok1 , @srok2 , @dop , @forsmajor , @peni , @nevozmojno , @do , @kolvo)", Connection);
+                "@p1 , @p2 , @srok1 , @srok2 , @dop , @forsmajor , @peni , @nevozmojno , @do , @kolvo)", Connection);
             command.Parameters.AddWithValue("@data", dateTimePicker1.Value.ToString("dd'.'MM'.'yyyy")); 
             command.Parameters.AddWithValue("@summ", textBox1.Text);
             command.Parameters.AddWithValue("@sotr", comboBox1.Text.Substring(0, comboBox1.Text.IndexOf(' ')));
@@ -99,8 +112,8 @@ namespace vkr
             command.Parameters.AddWithValue("@nepozdnee", textBox7.Text);
             command.Parameters.AddWithValue("@vozvrat", dateTimePicker2.Value.ToString("dd'.'MM'.'yyyy"));
             command.Parameters.AddWithValue("@neust", textBox8.Text);
-            command.Parameters.AddWithValue("@%1", textBox9.Text);
-            command.Parameters.AddWithValue("@%2", textBox10.Text);
+            command.Parameters.AddWithValue("@p1", textBox9.Text);
+            command.Parameters.AddWithValue("@p2", textBox10.Text);
             command.Parameters.AddWithValue("@srok1", textBox11.Text);
             command.Parameters.AddWithValue("@srok2", textBox12.Text);
             command.Parameters.AddWithValue("@dop", textBox13.Text);

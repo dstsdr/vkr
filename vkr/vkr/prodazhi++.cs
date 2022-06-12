@@ -53,7 +53,7 @@ namespace vkr
             checkBox5.Checked = false;
             checkBox5.Visible = false;
             this.Height = 330;
-
+            katalog();
         }
         private void bezrecepttovar ()
         {
@@ -101,6 +101,23 @@ namespace vkr
             groupBox3.Visible = true;
             groupBox2.Visible = true;
             this.Height= 637;
+            katalog();
+        }
+        private void katalog ()
+        {
+            if (label15.Text != "0")
+            {
+                for (int i = 0; i < checkedListBox3.Items.Count; i++)
+                {
+                    string s = (checkedListBox3.Items[i]).ToString().Substring(0, (checkedListBox3.Items[i]).ToString().IndexOf(' '));
+
+                    if (s == label15.Text)
+                    {
+                        checkedListBox3.SelectedItem = checkedListBox3.Items[i];
+                        checkedListBox3.SetItemChecked(i, true);
+                    }
+                }
+            }
         }
         SqlConnection Connection = new SqlConnection(@"Data Source=LAPTOP-862V88EF\SQLEXPRESS;Initial Catalog=vkr;Integrated Security=True");
 
@@ -309,12 +326,16 @@ namespace vkr
 
         private void prodazhi___Load(object sender, EventArgs e)
         {
-
+           
         }
 
         private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void prodazhi___Shown(object sender, EventArgs e)
+        {
         }
     }
 }

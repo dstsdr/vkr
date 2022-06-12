@@ -23,7 +23,6 @@ namespace vkr
         private void tovar_Load(object sender, EventArgs e)
         {
             dataset();
-            cenoobrazovanie();
         }
         private void dataset()
         {
@@ -42,55 +41,54 @@ namespace vkr
             dataGridView1.DataSource = ds.Tables[0];
             Connection.Close();
             int rows = dataGridView1.Rows.Count - 1;
-            label1.Text = "Количество записей " + rows.ToString();
+            label1.Text = "Количество товаров: " + rows.ToString();
             dataGridView1.Columns[7].Visible = false;
         }
-        private void cenoobrazovanie()
-        {
-           /* Connection.Open();
-            int a = 0;
-            string sqlExpression = "";
-            SqlCommand command = new SqlCommand(sqlExpression, Connection);
-            SqlDataReader reader = command.ExecuteReader();
-            if (reader.HasRows) //данные из банка и договора
-            {
-                while (reader.Read())
-                {
-                    if (a == 1)
-                    {
-                        var namepost = reader.GetValue(0).ToString(); //поставщик
-                        var contactpost = reader.GetValue(1).ToString();
-                        var pochtapost = reader.GetValue(2).ToString();
-                        var uridichpost = reader.GetValue(3).ToString();
-                        var INNpost = reader.GetValue(4).ToString();
-                        var kpppost = reader.GetValue(5).ToString();
-                        var raspost = reader.GetValue(6).ToString();
-                        var korpost = reader.GetValue(7).ToString();
-                        var bikPost = reader.GetValue(8).ToString();
-                        var bankpost = reader.GetValue(9).ToString();
-                     
-                    }
-                    else
-                    {
-                        var nameapteka = reader.GetValue(0).ToString();
-                        var contactapteka = reader.GetValue(1).ToString();
-                        var pochtaapteka = reader.GetValue(2).ToString();
-                        var uridichapteka = reader.GetValue(3).ToString();
-                        var INNapteka = reader.GetValue(4).ToString();
-                        var kppapteka = reader.GetValue(5).ToString();
-                        var rasapteka = reader.GetValue(6).ToString();
-                        var korapteka = reader.GetValue(7).ToString();
-                        var bikapteka = reader.GetValue(8).ToString();
-                        var bankapteka = reader.GetValue(9).ToString();
-                    }
-                    a++;
-                }*/
-            }
-
         private void button1_Click(object sender, EventArgs e)
         {
             tovar__ frm2 = new tovar__();           
             frm2.Show();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                checkBox6.Checked = false;
+                int s = Convert.ToInt32(dataGridView1.CurrentCell.Value);
+                Connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Производитель.* " +
+                    "from[Характеристики лекарств] inner join[Серийный номер] ON[Серийный номер].[Код характеристики] =[Характеристики лекарств].[Код характеристики] " +
+                    "inner join Производитель ON Производитель.[Код производителя] =[Характеристики лекарств].[Код производителя] " +
+                    "WHERE[Серийный номер].[Серийный номер] = " + s, Connection);
+                DataSet ds2 = new DataSet();
+                adapter.Fill(ds2, "info");
+                dataGridView2.DataSource = ds2.Tables[0];
+                Connection.Close();
+            }
+        }
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+            {
+                checkBox1.Checked = false;
+                int s = Convert.ToInt32(dataGridView1.CurrentCell.Value);
+                Connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Поставщик.* " +
+                    "from[Характеристики лекарств] inner join[Серийный номер] ON[Серийный номер].[Код характеристики] =[Характеристики лекарств].[Код характеристики] " +
+                    "inner join(Договор inner join Поставщик on Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика]) ON Договор.[Номер договора] = [Характеристики лекарств].[Номер договора]" +
+                    " WHERE[Серийный номер].[Серийный номер] = " + s, Connection);
+                DataSet ds2 = new DataSet();
+                adapter.Fill(ds2, "info");
+                dataGridView2.DataSource = ds2.Tables[0];
+                Connection.Close();
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

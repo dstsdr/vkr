@@ -108,10 +108,13 @@ namespace vkr
             {
                 dataGridView2.Rows[i].Cells[4].Value= Convert.ToDouble(dataGridView2.Rows[i].Cells[3].Value)* Convert.ToDouble(dataGridView2.Rows[i].Cells[2].Value);
                 dataGridView2.Rows[i].Cells[4].Value = Math.Round(Convert.ToDouble(dataGridView2.Rows[i].Cells[4].Value) + (Convert.ToDouble(dataGridView2.Rows[i].Cells[4].Value) * 10 / 100));
+                dataGridView2.Rows[i].Cells[3].Value = Math.Round(Convert.ToDouble(dataGridView2.Rows[i].Cells[3].Value),2);
+                dataGridView2.Rows[i].Cells[2].Value = Math.Round(Convert.ToDouble(dataGridView2.Rows[i].Cells[2].Value), 2);
             }
 
-
-
+            int rows = dataGridView2.Rows.Count - 1;
+            label1.Text = "Количество месяцев: " + rows.ToString();
+            label1.Visible = true;
         }
 
     private void progznoz_Load(object sender, EventArgs e)
@@ -131,10 +134,19 @@ namespace vkr
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.dataGridView2.DataSource = null;
+            this.dataGridView2.DataBindings.Clear();
+            while (dataGridView2.Rows.Count > 1)
+                for (int i = 0; i < dataGridView2.Rows.Count - 1; i++)
+                    dataGridView2.Rows.Remove(dataGridView2.Rows[i]); int count = this.dataGridView2.Columns.Count;
+            for (int i = 0; i < count; i++)     // цикл удаления всех столбцов
+            {
+                this.dataGridView2.Columns.RemoveAt(0);
+            }
             if (comboBox2.SelectedIndex == 0)
             {
                 comboBox1.Visible = true;
-                label1.Visible = true;
+                label3.Visible = true;
                 groupBox1.Visible = false;
                 groupBox2.Visible = false;
                 dataGridView2.Visible = true;
@@ -157,11 +169,11 @@ namespace vkr
             else
             {
                 comboBox1.Visible = false;
-                label1.Visible = false;
                 groupBox2.Visible = true;
                 groupBox1.Visible = true;
                 dataGridView2.Visible = false;
                 button1.Visible = true;
+                label3.Visible = false;
             }
         }
 
@@ -178,6 +190,10 @@ namespace vkr
             if (radioButton6.Checked == true) sleep(); 
             if (radioButton5.Checked == true) centr();
             if (radioButton4.Checked == true) trc();
+            button1.Visible = false;
+            int rows = dataGridView2.Rows.Count - 1;
+            label1.Visible = true;
+            label1.Text = "Количество лекарственных средств: " + rows.ToString();
         }
         private void zvnlpapteki()
         {

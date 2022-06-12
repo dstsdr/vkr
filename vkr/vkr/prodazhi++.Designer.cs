@@ -78,6 +78,8 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1MZ.SuspendLayout();
@@ -247,6 +249,7 @@
             this.checkBox4.TabIndex = 130;
             this.checkBox4.Text = "Рецептурная продажа по месту жительства";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Visible = false;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // textBox6
@@ -415,6 +418,7 @@
             this.checkBox5.TabIndex = 129;
             this.checkBox5.Text = "Безрецептурная продажа";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Visible = false;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // groupBox1MZ
@@ -450,6 +454,7 @@
             this.groupBox4MK.TabIndex = 126;
             this.groupBox4MK.TabStop = false;
             this.groupBox4MK.Text = "Клиент по номеру мед. карты";
+            this.groupBox4MK.Visible = false;
             // 
             // label13
             // 
@@ -631,11 +636,34 @@
             this.button2.Text = "Добавить";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(899, 535);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(129, 42);
+            this.button3.TabIndex = 165;
+            this.button3.Text = "Изменить";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label15.Location = new System.Drawing.Point(827, 9);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(18, 20);
+            this.label15.TabIndex = 56;
+            this.label15.Text = "0";
+            this.label15.Visible = false;
+            // 
             // prodazhi__
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 589);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
@@ -649,8 +677,9 @@
             this.Controls.Add(this.checkBox5);
             this.Controls.Add(this.groupBox1MZ);
             this.Name = "prodazhi__";
-            this.Text = "prodazhi__";
+            this.Text = "Продажи";
             this.Load += new System.EventHandler(this.prodazhi___Load);
+            this.Shown += new System.EventHandler(this.prodazhi___Shown);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -700,11 +729,9 @@
         private System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.CheckBox checkBox5;
         private System.Windows.Forms.GroupBox groupBox1MZ;
         private System.Windows.Forms.GroupBox groupBox4MK;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.CheckedListBox checkedListBox3;
         private System.Windows.Forms.CheckedListBox checkedListBox2;
@@ -718,6 +745,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Label label15;
+        public System.Windows.Forms.CheckBox checkBox5;
+        public System.Windows.Forms.CheckBox checkBox2;
     }
 }
