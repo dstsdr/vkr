@@ -288,6 +288,10 @@ namespace vkr
                 cmd6.CommandType = CommandType.Text;
                 cmd6.CommandText = "SELECT  MAX(Лекарства.[Код лекарства]) AS id from Лекарства"; //получили мах id */
                 cmd6.ExecuteNonQuery();
+                if (command.ExecuteNonQuery() != 1)
+                {
+                    MessageBox.Show("Возникла ошибка при добавлении лекарства");
+                }
                 DataTable dt6 = new DataTable();
                 SqlDataAdapter da6 = new SqlDataAdapter(cmd6);
                 da6.Fill(dt6);
@@ -299,6 +303,10 @@ namespace vkr
                 cmd8.CommandType = CommandType.Text;
                 cmd8.CommandText = "SELECT Лекарства.[Код лекарства] AS Код from Лекарства WHERE Лекарства.Наименование = '" + comboBox1.Text + "'";
                 cmd8.ExecuteNonQuery();
+                if (cmd8.ExecuteNonQuery() != 1)
+                {
+                    MessageBox.Show("Возникла ошибка при распознавании лекарства");
+                }
                 DataTable dt8 = new DataTable();
                 SqlDataAdapter da8 = new SqlDataAdapter(cmd8);
                 da8.Fill(dt8);
@@ -314,6 +322,10 @@ namespace vkr
                 "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +
                 "AND Лекарства.Наименование = '" + comboBox1.Text + "'"; //получили id */
             cmd.ExecuteNonQuery();
+            if (cmd.ExecuteNonQuery() != 1)
+            {
+                MessageBox.Show("Возникла ошибка при получении номера характеристики товара");
+            }            
             DataTable dt = new DataTable();
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             da.Fill(dt);
@@ -347,6 +359,10 @@ namespace vkr
                 cmd7.CommandType = CommandType.Text;
                 cmd7.CommandText = "SELECT  MAX([Характеристики лекарств].[Код характеристики]) AS id from  [Характеристики лекарств]"; //получили id */
                 cmd7.ExecuteNonQuery();
+                if (cmd7.ExecuteNonQuery() != 1)
+                {
+                    MessageBox.Show("Возникла ошибка при добавлении характеристик товара");
+                }
                 DataTable dt7 = new DataTable();
                 SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
                 da7.Fill(dt7);
@@ -363,6 +379,14 @@ namespace vkr
             command1.Parameters.AddWithValue("@srok", dateTimePicker2.Value.ToString("dd'.'MM'.'yyyy"));
             command1.Parameters.AddWithValue("@kodx", x);
             command1.ExecuteNonQuery();
+            if (command1.ExecuteNonQuery() != 1)
+            {
+                MessageBox.Show("Возникла ошибка при добавлении товара");
+            }
+            else
+            {
+                MessageBox.Show("товар добавлен");
+            }
             Connection.Close();
         }
 
@@ -389,7 +413,11 @@ namespace vkr
             "Договор.Количество AS SUMM from Договор inner join НДС ON Договор.НДС = НДС.[Код НДС] inner join [Характеристики лекарств] ON " +
             "[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
             "WHERE НДС.Проценты = " + comboBox10.Text + " and Договор.[Номер договора]=" + comboBox4.Text; //получили id */
-            cmd7.ExecuteNonQuery();
+            cmd7.ExecuteNonQuery(); 
+            if ( cmd7.ExecuteNonQuery() != 1)
+            {
+                MessageBox.Show("Возникла ошибка при вычислении цены");
+            }
             DataTable dt7 = new DataTable();
             SqlDataAdapter da7 = new SqlDataAdapter(cmd7);
             da7.Fill(dt7);

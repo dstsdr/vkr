@@ -19,7 +19,8 @@ namespace vkr
 
         private void toolStripMenuItem9_Click(object sender, EventArgs e)
         {
-
+            nacenka frm2 = new nacenka();
+            frm2.Show();
         }
 
         private void interface_Load(object sender, EventArgs e)
@@ -103,6 +104,96 @@ namespace vkr
         private void toolStripMenuItem14_Click(object sender, EventArgs e)
         {
             help frm2 = new help();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            prodazhi frm2 = new prodazhi();
+            frm2.Show();
+        }
+
+        private void скидкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sale frm2 = new sale();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            znvlm frm2 = new znvlm();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+            postav frm2 = new postav();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem12_Click(object sender, EventArgs e)
+        {
+            proizv frm2 = new proizv();
+            frm2.Show();
+        }
+
+        private void банкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            prodazhi frm2 = new prodazhi();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+            vrach frm2 = new vrach();
+            frm2.Show();
+        }
+
+        private void toolStripMenuItem13_Click(object sender, EventArgs e)
+        {
+            klient frm2 = new klient();
+            frm2.Show();
+        }
+
+        private void сотрудникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sotr frm2 = new sotr();
+            frm2.Show();
+        }
+
+        private void должностиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dolzn frm2 = new dolzn();
+            frm2.Show();
+        }
+
+        private void формаВыпускаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            forma frm2 = new forma();
+            frm2.Show();
+        }
+
+        private void фармакологическаяГруппаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            farm frm2 = new farm();
+            frm2.Show();
+        }
+
+        private void нДСToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nds frm2 = new nds();
+            frm2.Show();
+        }
+
+        private void банкиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bank frm2 = new bank();
+            frm2.Show();
+        }
+
+        private void аптекиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            apteka frm2 = new apteka();
             frm2.Show();
         }
     }

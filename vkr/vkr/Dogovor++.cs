@@ -123,6 +123,14 @@ namespace vkr
             command.Parameters.AddWithValue("@do", dateTimePicker3.Value.ToString("dd'.'MM'.'yyyy"));
             command.Parameters.AddWithValue("@kolvo", textBox17.Text);
             command.ExecuteNonQuery();
+            if (command.ExecuteNonQuery() != 1)
+            {
+                MessageBox.Show("Возникла ошибка при добавлении договора");
+            }
+            else
+            {
+                MessageBox.Show("Договор добавлен");
+            }
             Connection.Close();
         }
     }

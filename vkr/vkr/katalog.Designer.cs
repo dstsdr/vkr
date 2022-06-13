@@ -100,6 +100,7 @@
             this.checkBox4.TabIndex = 143;
             this.checkBox4.Text = "Безрецептурные лекарства";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -113,6 +114,7 @@
             this.checkBox5.TabIndex = 142;
             this.checkBox5.Text = "Рецептурные лекарства";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // dataGridView1
             // 
@@ -298,6 +300,7 @@
             this.checkBox7.TabIndex = 147;
             this.checkBox7.Text = "ЖНВЛП";
             this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
             // 
             // button1
             // 

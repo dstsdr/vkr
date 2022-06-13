@@ -35,7 +35,7 @@ namespace vkr
                 "Наценка.[Код наценки] = Лекарства.[Код наценки]) ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства] inner join[Форма выпуска] ON" +
                 "[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON Производитель.[Код производителя] =[Характеристики лекарств].[Код производителя] " +
                 "inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] WHERE [Серийный номер].[Код рецептурной продажи] " +
-                "is null and [Серийный номер].[Код безрецептурной продажи] is null", Connection);
+                "is null and [Серийный номер].[Код безрецептурной продажи] is null  and [Серийный номер].[Срок годности]>GETDATE()", Connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "info");
             dataGridView1.DataSource = ds.Tables[0];
@@ -89,6 +89,114 @@ namespace vkr
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void checkBox5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox5.CheckState == CheckState.Checked)
+            {
+                checkBox4.CheckState = CheckState.Unchecked;
+                checkBox7.CheckState = CheckState.Unchecked;
+                checkBox8.CheckState = CheckState.Unchecked;
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT [Серийный номер].[Серийный номер], [Серийный номер].[Срок годности], [Характеристики лекарств].Дозировка, " +
+                    "[Характеристики лекарств].[Цена],[Характеристики лекарств].Наценка, Наценка.Наценка as [Максимальная наценка], Лекарства.Наименование, [Фарм группа].Название " +
+                    "AS[Фарм группа], [Форма выпуска].Форма AS[Форма выпуска], Производитель.Наименование AS[Производитель], [Условие отпуска].Условие from[Характеристики лекарств]" +
+                    " inner join(Лекарства inner join[Условие отпуска] ON Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] ON Лекарства.[Код группы] =" +
+                    "[Фарм группа].[Код группы] inner join Наценка ON Наценка.[Код наценки] = Лекарства.[Код наценки]) ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]" +
+                    " inner join[Форма выпуска] ON [Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON Производитель.[Код производителя] " +
+                    "=[Характеристики лекарств].[Код производителя] inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] " +
+                    "WHERE[Серийный номер].[Код рецептурной продажи] is null and [Серийный номер].[Код безрецептурной продажи] is null and [Условие отпуска].Условие = 'Рецептурное' " +
+                    "and[Серийный номер].[Срок годности] > GETDATE() ", Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "info");
+                dataGridView1.DataSource = ds.Tables[0];
+                Connection.Close();
+                int rows = dataGridView1.Rows.Count - 1;
+                label1.Text = "Количество записей " + rows.ToString();
+                
+
+            }
+            else { dataset(); }
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.CheckState == CheckState.Checked)
+            {
+                checkBox5.CheckState = CheckState.Unchecked;
+                checkBox7.CheckState = CheckState.Unchecked;
+                checkBox8.CheckState = CheckState.Unchecked;
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT [Серийный номер].[Серийный номер], [Серийный номер].[Срок годности], [Характеристики лекарств].Дозировка, " +
+                    "[Характеристики лекарств].[Цена],[Характеристики лекарств].Наценка, Наценка.Наценка as [Максимальная наценка], Лекарства.Наименование, [Фарм группа].Название " +
+                    "AS[Фарм группа], [Форма выпуска].Форма AS[Форма выпуска], Производитель.Наименование AS[Производитель], [Условие отпуска].Условие from[Характеристики лекарств]" +
+                    " inner join(Лекарства inner join[Условие отпуска] ON Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] ON Лекарства.[Код группы] =" +
+                    "[Фарм группа].[Код группы] inner join Наценка ON Наценка.[Код наценки] = Лекарства.[Код наценки]) ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]" +
+                    " inner join[Форма выпуска] ON [Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON Производитель.[Код производителя] " +
+                    "=[Характеристики лекарств].[Код производителя] inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] " +
+                    "WHERE[Серийный номер].[Код рецептурной продажи] is null and [Серийный номер].[Код безрецептурной продажи] is null and [Условие отпуска].Условие = 'Безрецептурное' " +
+                    "and[Серийный номер].[Срок годности] > GETDATE() ", Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "info");
+                dataGridView1.DataSource = ds.Tables[0];
+                Connection.Close();
+                int rows = dataGridView1.Rows.Count - 1;
+                label1.Text = "Количество записей " + rows.ToString();
+            }
+            else { dataset(); }
+        }
+
+        private void checkBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox8.CheckState == CheckState.Checked)
+            {
+                checkBox5.CheckState = CheckState.Unchecked;
+                checkBox7.CheckState = CheckState.Unchecked;
+                checkBox4.CheckState = CheckState.Unchecked;
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT [Серийный номер].[Серийный номер], [Серийный номер].[Срок годности], [Характеристики лекарств].Дозировка," +
+                " [Характеристики лекарств].[Цена],[Характеристики лекарств].Наценка," +
+                " Наценка.Наценка as [Максимальная наценка], Лекарства.Наименование, [Фарм группа].Название AS[Фарм группа], [Форма выпуска].Форма" +
+                " AS[Форма выпуска], Производитель.Наименование AS[Производитель], [Условие отпуска].Условие from[Характеристики лекарств] inner join(Лекарства inner join[Условие отпуска] ON " +
+                "Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] ON Лекарства.[Код группы] =[Фарм группа].[Код группы] inner join Наценка ON " +
+                "Наценка.[Код наценки] = Лекарства.[Код наценки]) ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства] inner join[Форма выпуска] ON" +
+                "[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON Производитель.[Код производителя] =[Характеристики лекарств].[Код производителя] " +
+                "inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] WHERE [Серийный номер].[Код рецептурной продажи] " +
+                "is null and [Серийный номер].[Код безрецептурной продажи] is null  and [Серийный номер].[Срок годности]<GETDATE() ", Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "info");
+                dataGridView1.DataSource = ds.Tables[0];
+                Connection.Close();
+                int rows = dataGridView1.Rows.Count - 1;
+                label1.Text = "Количество записей " + rows.ToString();
+            }
+            else { dataset(); }
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.CheckState == CheckState.Checked)
+            {
+                checkBox5.CheckState = CheckState.Unchecked;
+                checkBox8.CheckState = CheckState.Unchecked;
+                checkBox4.CheckState = CheckState.Unchecked;
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT [Серийный номер].[Серийный номер], [Серийный номер].[Срок годности], [Характеристики лекарств].Дозировка, " +
+                    "[Характеристики лекарств].[Цена],[Характеристики лекарств].Наценка, Наценка.Наценка as [Максимальная наценка], Лекарства.Наименование, [Фарм группа].Название " +
+                    "AS[Фарм группа], [Форма выпуска].Форма AS[Форма выпуска], Производитель.Наименование AS[Производитель], [Условие отпуска].Условие, [Необходимый минимум].[Код лекарства] " +
+                    "from[Характеристики лекарств] inner join(Лекарства inner join[Условие отпуска] ON Лекарства.[Код условия] =[Условие отпуска].[Код условия] inner join[Фарм группа] " +
+                    "ON Лекарства.[Код группы] =[Фарм группа].[Код группы] inner join Наценка ON Наценка.[Код наценки] = Лекарства.[Код наценки] inner join[Необходимый минимум] " +
+                    "ON[Необходимый минимум].[Код лекарства] = Лекарства.[Код лекарства]) ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства] inner join[Форма выпуска] " +
+                    "ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] inner join Производитель ON Производитель.[Код производителя] =" +
+                    "[Характеристики лекарств].[Код производителя] inner join[Серийный номер] ON[Характеристики лекарств].[Код характеристики] =[Серийный номер].[Код характеристики] " +
+                    "WHERE[Серийный номер].[Код рецептурной продажи] is null and [Серийный номер].[Код безрецептурной продажи] is null and [Необходимый минимум].[Код лекарства] " +
+                    "is not null and [Серийный номер].[Срок годности] > GETDATE() ", Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "info");
+                dataGridView1.DataSource = ds.Tables[0];
+                Connection.Close();
+                int rows = dataGridView1.Rows.Count - 1;
+                label1.Text = "Количество записей " + rows.ToString();
+                dataGridView1.Columns["Код лекарства"].Visible = false;
+            }
+            else { dataset(); }
         }
     }
 }

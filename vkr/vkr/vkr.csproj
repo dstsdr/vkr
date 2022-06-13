@@ -47,6 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apteka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apteka.Designer.cs">
+      <DependentUpon>apteka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="bank.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="bank.Designer.cs">
+      <DependentUpon>bank.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dogovor++.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +70,24 @@
     </Compile>
     <Compile Include="dogovor.Designer.cs">
       <DependentUpon>dogovor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dolzn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dolzn.Designer.cs">
+      <DependentUpon>dolzn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="farm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="farm.Designer.cs">
+      <DependentUpon>farm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forma.Designer.cs">
+      <DependentUpon>forma.cs</DependentUpon>
     </Compile>
     <Compile Include="help.cs">
       <SubType>Form</SubType>
@@ -76,6 +106,30 @@
     </Compile>
     <Compile Include="katalog.Designer.cs">
       <DependentUpon>katalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="klient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="klient.Designer.cs">
+      <DependentUpon>klient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nacenka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nacenka.Designer.cs">
+      <DependentUpon>nacenka.cs</DependentUpon>
+    </Compile>
+    <Compile Include="nds.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="nds.Designer.cs">
+      <DependentUpon>nds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="postav.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="postav.Designer.cs">
+      <DependentUpon>postav.cs</DependentUpon>
     </Compile>
     <Compile Include="prodazhi++.cs">
       <SubType>Form</SubType>
@@ -96,7 +150,25 @@
     <Compile Include="progznoz.Designer.cs">
       <DependentUpon>progznoz.cs</DependentUpon>
     </Compile>
+    <Compile Include="proizv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="proizv.Designer.cs">
+      <DependentUpon>proizv.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sale.Designer.cs">
+      <DependentUpon>sale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sotr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sotr.Designer.cs">
+      <DependentUpon>sotr.cs</DependentUpon>
+    </Compile>
     <Compile Include="statistika.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,11 +187,38 @@
     <Compile Include="tovar.Designer.cs">
       <DependentUpon>tovar.cs</DependentUpon>
     </Compile>
+    <Compile Include="vrach.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="vrach.Designer.cs">
+      <DependentUpon>vrach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="znvlm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="znvlm.Designer.cs">
+      <DependentUpon>znvlm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="apteka.resx">
+      <DependentUpon>apteka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bank.resx">
+      <DependentUpon>bank.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dogovor++.resx">
       <DependentUpon>Dogovor++.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dogovor.resx">
       <DependentUpon>dogovor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dolzn.resx">
+      <DependentUpon>dolzn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="farm.resx">
+      <DependentUpon>farm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forma.resx">
+      <DependentUpon>forma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui.resx">
       <DependentUpon>gui.cs</DependentUpon>
@@ -130,6 +229,18 @@
     <EmbeddedResource Include="katalog.resx">
       <DependentUpon>katalog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="klient.resx">
+      <DependentUpon>klient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nacenka.resx">
+      <DependentUpon>nacenka.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="nds.resx">
+      <DependentUpon>nds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="postav.resx">
+      <DependentUpon>postav.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="prodazhi++.resx">
       <DependentUpon>prodazhi++.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +249,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="progznoz.resx">
       <DependentUpon>progznoz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="proizv.resx">
+      <DependentUpon>proizv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -148,6 +262,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="sale.resx">
+      <DependentUpon>sale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sotr.resx">
+      <DependentUpon>sotr.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="statistika.resx">
       <DependentUpon>statistika.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +276,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="tovar.resx">
       <DependentUpon>tovar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vrach.resx">
+      <DependentUpon>vrach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="znvlm.resx">
+      <DependentUpon>znvlm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
