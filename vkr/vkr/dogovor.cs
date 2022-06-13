@@ -31,7 +31,7 @@ namespace vkr
                 "Поставщик.Название) as Поставщик, НДС.Проценты as НДС, Договор.[Срок оплаты], Договор.[Срок годности %], Договор.[повреждений вторичной упаковки] as " +
                 "[Срок обнаружения повреждений вторичной упаковки] , Договор.[Рассмотрение претензии], Договор.[Скрытые недостатки не поздее], Договор.[Возврат до], " +
                 "Договор.Неустойка, Договор.[Процент первой поставки] as [Размер 1 поставки в %], Договор.[Срок первой поставки] as [Срок 1 поставки], Договор.[Процент второй поставки] " +
-                "as [Размер 1 поставки в %], Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс-мажоре] as " +
+                "as [Размер 2 поставки в %], Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс-мажоре] as " +
                 "[Срок информирования о форс-мажоре], Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] " +
                 "FROM Договор inner join(Сотрудник inner join Должность ON Должность.[Код должности] = Сотрудник.[Код должности]) ON Договор.[Код сотрудника] =" +
                 " Сотрудник.[Код сотрудника] inner join Поставщик ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] inner join([Характеристики лекарств] inner join Лекарства " +
@@ -166,24 +166,25 @@ namespace vkr
                     string number= dataGridView1.CurrentRow.Cells[0].Value.ToString();
                //  string adres = "г. " + city.ToString() + ", ул. " + street.ToString() + ", " + hn.ToString();
                 DateTime datezakluch = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());
-		        DateTime vozvrat= Convert.ToDateTime(dataGridView1.Rows[0].Cells[12].Value.ToString());
-                DateTime dogvordo = Convert.ToDateTime(dataGridView1.Rows[0].Cells[22].Value.ToString());
+		        DateTime vozvrat= Convert.ToDateTime(dataGridView1.Rows[0].Cells[13].Value.ToString());
+                DateTime dogvordo = Convert.ToDateTime(dataGridView1.Rows[0].Cells[23].Value.ToString());
                 	// где вставка впихнуть Д datezakluch.ToString("D");
- 		string onepercent = dataGridView1.CurrentRow.Cells[14].Value.ToString();
-		string twopercent = dataGridView1.CurrentRow.Cells[15].Value.ToString();
+ 		string onepercent = dataGridView1.CurrentRow.Cells[15].Value.ToString();
+		string twopercent = dataGridView1.CurrentRow.Cells[17].Value.ToString();
 		string oneday= dataGridView1.CurrentRow.Cells[16].Value.ToString();
-		string twoday= dataGridView1.CurrentRow.Cells[17].Value.ToString();
-		string srokDop= dataGridView1.CurrentRow.Cells[18].Value.ToString();
-		string srokGodnosti= dataGridView1.CurrentRow.Cells[7].Value.ToString();
+		string twoday= dataGridView1.CurrentRow.Cells[18].Value.ToString();
+		string srokDop= dataGridView1.CurrentRow.Cells[19].Value.ToString();
+		string srokGodnosti= dataGridView1.CurrentRow.Cells[9].Value.ToString();
 		string summ= dataGridView1.CurrentRow.Cells[2].Value.ToString();
-		string oplata= dataGridView1.CurrentRow.Cells[6].Value.ToString();
-		string vtorichka= dataGridView1.CurrentRow.Cells[8].Value.ToString();
-		string pretenziya= dataGridView1.CurrentRow.Cells[9].Value.ToString();
-		string skritieVtech= dataGridView1.CurrentRow.Cells[10].Value.ToString();
+		string oplata= dataGridView1.CurrentRow.Cells[8].Value.ToString();
+		string vtorichka= dataGridView1.CurrentRow.Cells[9].Value.ToString();
+		string pretenziya= dataGridView1.CurrentRow.Cells[10].Value.ToString();
+		string skritieVtech= dataGridView1.CurrentRow.Cells[11].Value.ToString();
 		string skritieNePozdnee= dataGridView1.CurrentRow.Cells[11].Value.ToString();
-		string neust= dataGridView1.CurrentRow.Cells[13].Value.ToString();
-		string forsmajor=dataGridView1.CurrentRow.Cells[19].Value.ToString();
-		string peni=dataGridView1.CurrentRow.Cells[20].Value.ToString();
+
+		string neust= dataGridView1.CurrentRow.Cells[14].Value.ToString();
+		string forsmajor=dataGridView1.CurrentRow.Cells[20].Value.ToString();
+		string peni=dataGridView1.CurrentRow.Cells[22].Value.ToString();
 		string nevozmozno=dataGridView1.CurrentRow.Cells[21].Value.ToString();
 
                 //заполнение
