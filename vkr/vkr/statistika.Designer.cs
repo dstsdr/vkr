@@ -262,6 +262,7 @@
             this.Controls.Add(this.comboBox1);
             this.Name = "statistika";
             this.Text = "tovar";
+            this.Load += new System.EventHandler(this.statistika_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);

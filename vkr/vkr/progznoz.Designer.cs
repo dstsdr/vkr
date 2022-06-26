@@ -48,6 +48,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -63,6 +65,7 @@
             this.button7.TabIndex = 138;
             this.button7.Text = "˅";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
             // 
             // button8
             // 
@@ -74,6 +77,7 @@
             this.button8.TabIndex = 137;
             this.button8.Text = "˄";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Visible = false;
             // 
             // button6
             // 
@@ -99,9 +103,9 @@
             this.label8.Location = new System.Drawing.Point(18, 16);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(304, 42);
+            this.label8.Size = new System.Drawing.Size(278, 42);
             this.label8.TabIndex = 128;
-            this.label8.Text = "Рекоммендации";
+            this.label8.Text = "Рекомендации";
             // 
             // dataGridView2
             // 
@@ -160,7 +164,7 @@
             this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton4.Location = new System.Drawing.Point(8, 148);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(1472, 64);
+            this.radioButton4.Size = new System.Drawing.Size(1404, 64);
             this.radioButton4.TabIndex = 155;
             this.radioButton4.TabStop = true;
             this.radioButton4.Text = resources.GetString("radioButton4.Text");
@@ -172,7 +176,7 @@
             this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton5.Location = new System.Drawing.Point(9, 98);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(1465, 44);
+            this.radioButton5.Size = new System.Drawing.Size(1397, 44);
             this.radioButton5.TabIndex = 154;
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = resources.GetString("radioButton5.Text");
@@ -184,12 +188,12 @@
             this.radioButton6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton6.Location = new System.Drawing.Point(8, 48);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(1477, 44);
+            this.radioButton6.Size = new System.Drawing.Size(1354, 44);
             this.radioButton6.TabIndex = 153;
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "В спальных районах - основу товарооборота составят преимущественно бюджетные преп" +
-    "араты от простуды, ОРВИ и гриппа, медикаменты от хронических заболеваний, \r\nтова" +
-    "ры для детей. ";
+    "араты от простуды, ОРВИ и гриппа, медикаменты от хронических\r\nзаболеваний, товар" +
+    "ы для детей. ";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -228,7 +232,7 @@
             this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton3.Location = new System.Drawing.Point(5, 128);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(1510, 44);
+            this.radioButton3.Size = new System.Drawing.Size(1456, 44);
             this.radioButton3.TabIndex = 154;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = resources.GetString("radioButton3.Text");
@@ -240,11 +244,11 @@
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButton2.Location = new System.Drawing.Point(5, 76);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(1507, 44);
+            this.radioButton2.Size = new System.Drawing.Size(1329, 44);
             this.radioButton2.TabIndex = 153;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Пункт - можно продавать препараты по рецептам врача, безрецептурные лекарства, но" +
-    " нельзя заниматься реализацией наркотических, психотропных, сильнодействующих \r\n" +
+    " нельзя заниматься реализацией наркотических, психотропных, \r\nсильнодействующих " +
     "и ядовитых медикаментов.";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -280,9 +284,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(24, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(401, 18);
+            this.label2.Size = new System.Drawing.Size(390, 18);
             this.label2.TabIndex = 160;
-            this.label2.Text = "Выберите для какого заказа требуется рекоммендация";
+            this.label2.Text = "Выберите для какого заказа требуется рекомендация";
             // 
             // label3
             // 
@@ -290,16 +294,36 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(22, 141);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(255, 18);
+            this.label3.Size = new System.Drawing.Size(121, 18);
             this.label3.TabIndex = 161;
-            this.label3.Text = "Выберите лекарственное средство";
+            this.label3.Text = "Выберите товар";
             this.label3.Visible = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1441, 29);
+            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(81, 34);
+            this.button3.TabIndex = 163;
+            this.button3.Text = "Поиск";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(546, 35);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(879, 22);
+            this.textBox1.TabIndex = 162;
             // 
             // progznoz
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1541, 728);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
@@ -346,5 +370,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

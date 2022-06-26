@@ -34,6 +34,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
@@ -57,8 +59,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +71,6 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(456, 22);
             this.dateTimePicker2.TabIndex = 53;
-            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // label5
             // 
@@ -142,6 +142,28 @@
             this.groupBox2.TabIndex = 147;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Характеристики лекарства";
+            // 
+            // comboBox10
+            // 
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Items.AddRange(new object[] {
+            "Добавить НДС"});
+            this.comboBox10.Location = new System.Drawing.Point(173, 258);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(456, 24);
+            this.comboBox10.TabIndex = 71;
+            this.comboBox10.Leave += new System.EventHandler(this.comboBox10_Leave);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.label13.Location = new System.Drawing.Point(9, 257);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(47, 20);
+            this.label13.TabIndex = 70;
+            this.label13.Text = "НДС";
             // 
             // comboBox8
             // 
@@ -387,33 +409,23 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // comboBox10
+            // label26
             // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Items.AddRange(new object[] {
-            "Добавить НДС"});
-            this.comboBox10.Location = new System.Drawing.Point(173, 258);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(456, 24);
-            this.comboBox10.TabIndex = 71;
-            this.comboBox10.Leave += new System.EventHandler(this.comboBox10_Leave);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.label13.Location = new System.Drawing.Point(9, 257);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(47, 20);
-            this.label13.TabIndex = 70;
-            this.label13.Text = "НДС";
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.Red;
+            this.label26.Location = new System.Drawing.Point(21, 525);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(262, 16);
+            this.label26.TabIndex = 171;
+            this.label26.Text = "Все поля обязательны для заполнения";
+            this.label26.Visible = false;
             // 
             // tovar__
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 568);
+            this.Controls.Add(this.label26);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
@@ -425,6 +437,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -460,5 +473,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox10;
         private System.Windows.Forms.Label label13;
+        public System.Windows.Forms.Label label26;
     }
 }

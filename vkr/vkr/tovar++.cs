@@ -46,12 +46,6 @@ namespace vkr
             }
             Connection.Close();
         }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void tovar___Load(object sender, EventArgs e)
         {
             datacmb();
@@ -217,43 +211,7 @@ namespace vkr
             Connection.Close();
             return l;
         }
-       /* private int xaracteristiki ()
-        {
-            /* n, f;
-            Connection.Open(); //получаем ид характеристики
-            SqlCommand cmd = Connection.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT [Характеристики лекарств].[Код характеристики] AS КодХ from[Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] " +
-                "=[Характеристики лекарств].[Код лекарства] inner join Производитель ON Производитель.[Код производителя] =" +
-                "[Характеристики лекарств].[Код производителя] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
-                "inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора] " +
-                "Where[Характеристики лекарств].Цена = " + comboBox8.Text + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
-                "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +
-                "AND Лекарства.Наименование = '" + comboBox1.Text + "'"; //получили id 
-            cmd.ExecuteNonQuery();
-            DataTable dt = new DataTable();
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            da.Fill(dt);
-            if (dt.Rows.Count == 0) // добавляем характеристики 
-            {
-                SqlCommand command = new SqlCommand("insert into [Характеристики лекарств]([Номер договора], [Код НДС], [Код лекарства], [Код формы]" +
-                    " [Дозировка],[Цена],[Код производителя],[Наценка] ) Values" +
-                               " (@date, @number, @OSN, @PERCENT, @OST,@nol)", Connection); //добавили лекарство
-                command.Parameters.AddWithValue("@number", textBox1.Text);
-                command.Parameters.AddWithValue("@OSN", y);
-                command.Parameters.AddWithValue("@PERCENT", n);
-                command.Parameters.AddWithValue("@OST", f);
-                command.ExecuteNonQuery();
-                Connection.Close();
-                return 0;
-            }
-            else
-            {
-                int  x = Convert.ToInt32(dt.Rows[0]["КодХ"]); //получаем код
-                Connection.Close();
-                return x; 
-            }
-        }*/
+       
         private void button1_Click(object sender, EventArgs e)
         {
             int x=0, l=0, y=0, n=0, f=0;
@@ -314,9 +272,11 @@ namespace vkr
             }
             SqlCommand cmd = Connection.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "SELECT [Характеристики лекарств].[Код характеристики] AS КодХ from[Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] " +
-                "=[Характеристики лекарств].[Код лекарства] inner join Производитель ON Производитель.[Код производителя] =" +
-                "[Характеристики лекарств].[Код производителя] inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
+            cmd.CommandText = "SELECT [Характеристики лекарств].[Код характеристики] AS КодХ " +
+                "from[Характеристики лекарств] " +
+                "inner join Лекарства ON Лекарства.[Код лекарства] " +                 "=[Характеристики лекарств].[Код лекарства] " +
+                "inner join Производитель ON Производитель.[Код производителя] =" +                 "[Характеристики лекарств].[Код производителя] " +
+                "inner join[Форма выпуска] ON[Форма выпуска].[Код формы] =[Характеристики лекарств].[Код формы] " +
                 "inner join Договор ON Договор.[Номер договора] =[Характеристики лекарств].[Номер договора] " +
                 "Where[Характеристики лекарств].Цена = " + comboBox8.Text.Replace(',','.') + " and Договор.[Номер договора]= " + comboBox4.Text + " and[Форма выпуска].Форма = '" + comboBox3.Text + "' " +
                 "and[Характеристики лекарств].Наценка = " + textBox2.Text + " and [Характеристики лекарств].Дозировка = " + comboBox5.Text + " and Производитель.Наименование = '" + comboBox2.Text + "' " +

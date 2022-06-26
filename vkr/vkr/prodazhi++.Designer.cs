@@ -80,6 +80,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1MZ.SuspendLayout();
@@ -657,11 +658,23 @@
             this.label15.Text = "0";
             this.label15.Visible = false;
             // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.ForeColor = System.Drawing.Color.Red;
+            this.label26.Location = new System.Drawing.Point(506, 550);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(262, 16);
+            this.label26.TabIndex = 166;
+            this.label26.Text = "Все поля обязательны для заполнения";
+            this.label26.Visible = false;
+            // 
             // prodazhi__
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1049, 589);
+            this.Controls.Add(this.label26);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -750,5 +763,6 @@
         public System.Windows.Forms.Label label15;
         public System.Windows.Forms.CheckBox checkBox5;
         public System.Windows.Forms.CheckBox checkBox2;
+        public System.Windows.Forms.Label label26;
     }
 }

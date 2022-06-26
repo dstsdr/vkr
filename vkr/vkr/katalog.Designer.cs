@@ -347,6 +347,7 @@
             this.Name = "katalog";
             this.Text = "katalog";
             this.Load += new System.EventHandler(this.katalog_Load);
+            this.Shown += new System.EventHandler(this.katalog_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);

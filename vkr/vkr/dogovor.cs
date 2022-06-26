@@ -25,27 +25,35 @@ namespace vkr
         }
         private void dataset()
         {
-            Connection.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT Договор.[Номер договора] as [№],Договор.[Дата заключения], Договор.[Сумма], Договор.Количество, " +
-                "Лекарства.Наименование as [Название товара], CONCAT(Сотрудник.Фамилия, ' ', Должность.Наименование) as Сотрудник, CONCAT(Договор.[ИНН поставщика], ' ', " +
-                "Поставщик.Название) as Поставщик, НДС.Проценты as НДС, Договор.[Срок оплаты], Договор.[Срок годности %], Договор.[повреждений вторичной упаковки] as " +
-                "[Срок обнаружения повреждений вторичной упаковки] , Договор.[Рассмотрение претензии], Договор.[Скрытые недостатки не поздее], Договор.[Возврат до], " +
-                "Договор.Неустойка, Договор.[Процент первой поставки] as [Размер 1 поставки в %], Договор.[Срок первой поставки] as [Срок 1 поставки], Договор.[Процент второй поставки] " +
-                "as [Размер 2 поставки в %], Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс-мажоре] as " +
-                "[Срок информирования о форс-мажоре], Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] " +
-                "FROM Договор inner join(Сотрудник inner join Должность ON Должность.[Код должности] = Сотрудник.[Код должности]) ON Договор.[Код сотрудника] =" +
-                " Сотрудник.[Код сотрудника] inner join Поставщик ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] inner join([Характеристики лекарств] inner join Лекарства " +
-                "ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) ON[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
-                "inner join НДС ON НДС.[Код НДС] = Договор.НДС", Connection);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds, "info");
-            dataGridView1.DataSource = ds.Tables[0];
-            Connection.Close();
-            int rows = dataGridView1.Rows.Count - 1;
-            label1.Text = "Количество договоров: " + rows.ToString();
-
-           // DateTime date = Convert.ToDateTime(dataGridView1.Rows[0].Cells[1].Value.ToString());            
-           // string d = date.ToString("D").Remove(0,3);
+            try
+            {
+                Connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Договор.[Номер договора] as [№],Договор.[Дата заключения], Договор.[Сумма], Договор.Количество, " +
+                    "Лекарства.Наименование as [Название товара], CONCAT(Сотрудник.Фамилия, ' ', Должность.Наименование) as Сотрудник, CONCAT(Договор.[ИНН поставщика], ' ', " +
+                    "Поставщик.Название) as Поставщик, НДС.Проценты as НДС, Договор.[Срок оплаты], Договор.[Срок годности %], Договор.[повреждений вторичной упаковки] as " +
+                    "[Срок обнаружения повреждений вторичной упаковки] , Договор.[Рассмотрение претензии], Договор.[Скрытые недостатки не поздее], Договор.[Возврат до], " +
+                    "Договор.Неустойка, Договор.[Процент первой поставки] as [Размер 1 поставки в %], Договор.[Срок первой поставки] as [Срок 1 поставки], Договор.[Процент второй поставки] " +
+                    "as [Размер 2 поставки в %], Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс-мажоре] as " +
+                    "[Срок информирования о форс-мажоре], Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] " +
+                    "FROM Договор " +
+                    "inner join(Сотрудник " +
+                    "inner join Должность ON Должность.[Код должности] = Сотрудник.[Код должности]) ON Договор.[Код сотрудника] =" + " Сотрудник.[Код сотрудника] " +
+                    "inner join Поставщик ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] " +
+                    "inner join([Характеристики лекарств] " +
+                    "inner join Лекарства " + "ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) " +
+                    "ON[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
+                    "inner join НДС ON НДС.[Код НДС] = Договор.НДС", Connection);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds, "info");
+                dataGridView1.DataSource = ds.Tables[0];
+                Connection.Close();
+                int rows = dataGridView1.Rows.Count - 1;
+                label1.Text = "Количество договоров: " + rows.ToString();
+            }
+            catch
+            {
+                MessageBox.Show("Отсутствует подключение к серверу");
+            }
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -58,8 +66,11 @@ namespace vkr
                 int s = Convert.ToInt32(dataGridView1.CurrentCell.Value);
                 Connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT Банк.* " +
-                    "FROM Банк INNER JOIN Поставщик ON Поставщик.БИК = Банк.БИК WHERE Поставщик.[ИНН поставщика] = (SELECT Поставщик.[ИНН поставщика] " +
-                    "FROM Поставщик INNER JOIN Договор ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] WHERE Договор.[Номер договора] = " + s + ")", Connection);
+                    "FROM Банк INNER JOIN Поставщик ON Поставщик.БИК = Банк.БИК " +
+                    "WHERE Поставщик.[ИНН поставщика] = (SELECT Поставщик.[ИНН поставщика] " +
+                    "FROM Поставщик " +
+                    "INNER JOIN Договор ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] " +
+                    "WHERE Договор.[Номер договора] = " + s + ")", Connection);
                 DataSet ds2 = new DataSet();
                 adapter.Fill(ds2, "info");
                 dataGridView2.DataSource = ds2.Tables[0];
@@ -70,21 +81,43 @@ namespace vkr
         private void button1_Click(object sender, EventArgs e)
         {
             Dogovor__ frm2 = new Dogovor__();
-          //  frm2.save.Visible = false;
-           // frm2.button1.Visible = true;
+            frm2.button1.Visible = false;
+            frm2.button2.Visible = true;
             frm2.Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-           /* int k = dataGridView1.CurrentRow.Index;
-            string s = dataGridView1[4, k].Value.ToString();
-            Connection.Open();
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT Клиенты.* FROM Клиенты INNER JOIN Договор ON Клиенты.ИНН = Договор.[ИНН клиента] WHERE Договор.[№]='" + s + "'", Connection);
-            DataSet ds2 = new DataSet();
-            adapter.Fill(ds2, "info");
-            dataGridView2.DataSource = ds2.Tables[0];
-            Connection.Close();*/
+            int s = dataGridView1.CurrentCell.RowIndex;            
+            Dogovor__ frm = new Dogovor__();
+            frm.button1.Visible = true;
+            frm.button2.Visible = false;
+            frm.dateTimePicker1.Value = Convert.ToDateTime(dataGridView1[1, s].Value);
+            frm.textBox1.Text = dataGridView1[2, s].Value.ToString();
+            frm.textBox17.Text = dataGridView1[3, s].Value.ToString();
+            frm.comboBox4.Text = dataGridView1[4, s].Value.ToString(); // подумоть
+            frm.comboBox1.Text = dataGridView1[5, s].Value.ToString(); // подумоть
+            frm.comboBox2.Text = dataGridView1[6, s].Value.ToString().Substring(0,dataGridView1[6, s].Value.ToString().IndexOf(' ')); // подумоть
+            frm.comboBox3.Text = dataGridView1[7, s].Value.ToString();
+            frm.textBox2.Text = dataGridView1[8, s].Value.ToString();
+            frm.textBox3.Text = dataGridView1[9, s].Value.ToString();
+            frm.textBox4.Text = dataGridView1[10, s].Value.ToString();
+            frm.textBox5.Text = dataGridView1[11, s].Value.ToString();
+            frm.textBox6.Text = dataGridView1[12, s].Value.ToString();
+            frm.textBox7.Text = dataGridView1[12, s].Value.ToString();
+            frm.dateTimePicker2.Value = Convert.ToDateTime(dataGridView1[13, s].Value);
+            frm.textBox8.Text = dataGridView1[14, s].Value.ToString();
+            frm.textBox9.Text = dataGridView1[15, s].Value.ToString(); 
+            frm.textBox11.Text = dataGridView1[16, s].Value.ToString();
+            frm.textBox10.Text = dataGridView1[17, s].Value.ToString();
+            frm.textBox12.Text = dataGridView1[18, s].Value.ToString();
+            frm.textBox13.Text = dataGridView1[19, s].Value.ToString();
+            frm.textBox14.Text = dataGridView1[20, s].Value.ToString();
+            frm.textBox15.Text = dataGridView1[21, s].Value.ToString();
+            frm.textBox16.Text = dataGridView1[22, s].Value.ToString();
+            frm.dateTimePicker2.Value = Convert.ToDateTime(dataGridView1[23, s].Value);
+            frm.label25.Text= dataGridView1[0, s].Value.ToString();
+            frm.ShowDialog();
         }
         private readonly string document = @"C:\Users\1652090\Downloads\shablon.docx";
 
@@ -98,12 +131,21 @@ namespace vkr
             int a = 0;
              string sqlExpression = "SELECT Поставщик.Название, Поставщик.[Контактное лицо], CONCAT('г. ', Поставщик.[Почтовый город], ' ул. ', Поставщик.[Почтовая улица], ' ',Поставщик.[Почтовый дом]," +
                 " ', ', Поставщик.[Почтовый индекс]), CONCAT('г. ', Поставщик.[Юр.Город], ' ул. ', Поставщик.[Юр.Улица], ' ',Поставщик.[Юр.Дом], ', ', Поставщик.[Юр.Индекс]), Поставщик.[ИНН поставщика]," +
-                " Поставщик.КПП, Поставщик.[Расчетный счет], Поставщик.[Кор.счет], Поставщик.БИК, Банк.Название FROM Договор INNER JOIN (Поставщик inner join Банк ON Банк.БИК=Поставщик.БИК) " +
-                "ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] where Договор.[Номер договора]= '" + s + "' UNION SELECT Аптека.Название,CONCAT( Сотрудник.Фамилия,' ', SUBSTRING(Сотрудник.Имя,1,1), ' ', " +
+                " Поставщик.КПП, Поставщик.[Расчетный счет], Поставщик.[Кор.счет], Поставщик.БИК, Банк.Название " +
+                "FROM Договор " +
+                "INNER JOIN (Поставщик " +
+                "inner join Банк ON Банк.БИК=Поставщик.БИК) " + "ON Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] where Договор.[Номер договора]= '" + s + "' " +
+                "UNION " +
+                "SELECT Аптека.Название,CONCAT( Сотрудник.Фамилия,' ', SUBSTRING(Сотрудник.Имя,1,1), ' ', " +
                 "SUBSTRING(Сотрудник.Отчество,1,1)), CONCAT('г. ', Аптека.[Почтовый город], ' ул. ', Аптека.[Почтовая улица], ' ',Аптека.[Почтовый дом], ', ', Аптека.[Почтовый индекс]), " +
                 "CONCAT('г. ', Аптека.[Юр.Город], ' ул. ', Аптека.[Юр.Улица], ' ',Аптека.[Юр.Дом], ', ', Аптека.[Юр.Индекс]), Аптека.ИНН, Аптека.КПП, Аптека.[Расчетный счет], Аптека.[Кор.счет], " +
-                "Аптека.БИК, Банк.Название FROM Договор Inner join((Аптека inner join Банк ON Банк.БИК = Аптека.БИК) inner join Сотрудник ON Сотрудник.[ИНН аптеки] = Аптека.ИНН ) " +
-                "ON Сотрудник.[Код должности] = Договор.[Код сотрудника] WHERE Договор.[Номер договора]= '" + s + "' AND Сотрудник.[Код должности] = 1";
+                "Аптека.БИК, Банк.Название " +
+                "FROM Договор " +
+                "Inner join((Аптека " +
+                "inner join Банк ON Банк.БИК = Аптека.БИК) " +
+                "inner join Сотрудник ON Сотрудник.[ИНН аптеки] = Аптека.ИНН ) " +
+                "ON Сотрудник.[Код должности] = Договор.[Код сотрудника] " +
+                "WHERE Договор.[Номер договора]= '" + s + "' AND Сотрудник.[Код должности] = 1";
              SqlCommand command = new SqlCommand(sqlExpression, Connection); 
              SqlDataReader reader = command.ExecuteReader();
              if (reader.HasRows) //данные из банка и договора
@@ -212,10 +254,7 @@ namespace vkr
                  ReplaceWordStub("{forsmajor}", forsmajor, wordDocument);  
                  ReplaceWordStub("{peni}", peni, wordDocument); 
                  ReplaceWordStub("{nevozmozno}", nevozmozno, wordDocument);   
-                 ReplaceWordStub("{srokgodnosti}", srokGodnosti, wordDocument);   
-
-
-                //  ReplaceWordStub("{polnaya2}", ItogCreditSum.ToString("N2"), wordDocument);
+                 ReplaceWordStub("{srokgodnosti}", srokGodnosti, wordDocument);  
                 Connection.Close();
              }
 
@@ -232,7 +271,17 @@ namespace vkr
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            Connection.Open();
+            string query = "DELETE FROM [Договор] " +
+                "WHERE Договор.[Номер договора]= " + dataGridView1.CurrentRow.Cells[0].Value;
+            SqlCommand command = new SqlCommand(query, Connection);
+            if (command.ExecuteNonQuery() != 1)
+            {
+                MessageBox.Show("Возникла ошибка при удалении договора");
+            }
+            else MessageBox.Show("Договор удален");
+            Connection.Close();
+            Update();
         }
 
         private void checkBox7_CheckedChanged(object sender, EventArgs e)
@@ -249,8 +298,10 @@ namespace vkr
                 checkBox2.Checked = false;
                 int s = Convert.ToInt32(dataGridView1.CurrentCell.Value);
                 Connection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Поставщик.* FROM Поставщик INNER JOIN Договор ON " +
-                    "Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] WHERE Договор.[Номер договора] =  " + s, Connection);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT Поставщик.* " +
+                    "FROM Поставщик " +
+                    "INNER JOIN Договор ON " + "Поставщик.[ИНН поставщика] = Договор.[ИНН поставщика] " +
+                    "WHERE Договор.[Номер договора] =  " + s, Connection);
                 DataSet ds2 = new DataSet();
                 adapter.Fill(ds2, "info");
                 dataGridView2.DataSource = ds2.Tables[0];
@@ -268,9 +319,12 @@ namespace vkr
                 int s = Convert.ToInt32(dataGridView1.CurrentCell.Value);
                 Connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT Аптека.* " +
-                    "FROM Аптека INNER JOIN Сотрудник ON Аптека.ИНН = Сотрудник.[ИНН аптеки] " +
-                    "WHERE Сотрудник.[ИНН аптеки] = (SELECT Сотрудник.[ИНН аптеки] FROM Сотрудник INNER JOIN Договор ON Сотрудник.[Код сотрудника] = Договор.[Код сотрудника]" +
-                    " WHERE Договор.[Номер договора] = " + s + ")", Connection);
+                    "FROM Аптека " +
+                    "INNER JOIN Сотрудник ON Аптека.ИНН = Сотрудник.[ИНН аптеки] " +
+                    "WHERE Сотрудник.[ИНН аптеки] = (SELECT Сотрудник.[ИНН аптеки] " +
+                    "FROM Сотрудник " +
+                    "INNER JOIN Договор ON Сотрудник.[Код сотрудника] = Договор.[Код сотрудника]" +
+                    "WHERE Договор.[Номер договора] = " + s + ")", Connection);
                 DataSet ds2 = new DataSet();
                 adapter.Fill(ds2, "info");
                 dataGridView2.DataSource = ds2.Tables[0];
@@ -289,8 +343,10 @@ namespace vkr
                 Connection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT Сотрудник.[Код сотрудника], Сотрудник.[ИНН аптеки], Должность.Наименование, Сотрудник.Фамилия, Сотрудник.Имя, " +
                     "Сотрудник.Отчество, Сотрудник.[Серия паспорта], Сотрудник.[Номер паспорта], Сотрудник.Телефон " +
-                    "FROM Сотрудник INNER JOIN Должность ON Сотрудник.[Код должности] = Должность.[Код должности] " +
-                    "INNER JOIN Договор ON Сотрудник.[Код сотрудника] = Договор.[Код сотрудника] WHERE Договор.[Код сотрудника] = " + s , Connection);
+                    "FROM Сотрудник " +
+                    "INNER JOIN Должность ON Сотрудник.[Код должности] = Должность.[Код должности] " +
+                    "INNER JOIN Договор ON Сотрудник.[Код сотрудника] = Договор.[Код сотрудника] " +
+                    "WHERE Договор.[Код сотрудника] = " + s , Connection);
                 DataSet ds2 = new DataSet();
                 adapter.Fill(ds2, "info");
                 dataGridView2.DataSource = ds2.Tables[0];
@@ -309,10 +365,16 @@ namespace vkr
                     "Договор.[Рассмотрение претензии], Договор.[Скрытые недостатки не поздее], Договор.[Возврат до], Договор.Неустойка, Договор.[Процент первой поставки] as " +
                     "[Размер 1 поставки в %], Договор.[Срок первой поставки] as [Срок 1 поставки], Договор.[Процент второй поставки] as [Размер 1 поставки в %], " +
                     "Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс - мажоре] as [Срок информирования о форс - мажоре], " +
-                    "Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] FROM Договор inner join(Сотрудник inner join Должность ON " +
-                    "Должность.[Код должности] = Сотрудник.[Код должности]) ON Договор.[Код сотрудника] = Сотрудник.[Код сотрудника] inner join Поставщик ON Поставщик.[ИНН поставщика] = " +
-                    "Договор.[ИНН поставщика] inner join([Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) ON" +
-                    "[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] inner join НДС ON НДС.[Код НДС] = Договор.НДС " +
+                    "Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] " +
+                    "FROM Договор " +
+                    "inner join(Сотрудник " +
+                    "inner join Должность ON " + "Должность.[Код должности] = Сотрудник.[Код должности])" +
+                    " ON Договор.[Код сотрудника] = Сотрудник.[Код сотрудника] " +
+                    "inner join Поставщик ON Поставщик.[ИНН поставщика] = " +  "Договор.[ИНН поставщика] " +
+                    "inner join([Характеристики лекарств] " +
+                    "inner join Лекарства ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) ON" +
+                    "[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
+                    "inner join НДС ON НДС.[Код НДС] = Договор.НДС " +
                     "WHERE Договор.[Действие договора до]< GETDATE()", Connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "info");
@@ -335,10 +397,16 @@ namespace vkr
                     "Договор.[Рассмотрение претензии], Договор.[Скрытые недостатки не поздее], Договор.[Возврат до], Договор.Неустойка, Договор.[Процент первой поставки] as " +
                     "[Размер 1 поставки в %], Договор.[Срок первой поставки] as [Срок 1 поставки], Договор.[Процент второй поставки] as [Размер 1 поставки в %], " +
                     "Договор.[Срок второй поставки][Срок 2 поставки], Договор.[Срок доп.заявок], Договор.[Срок информирование о форс - мажоре] as [Срок информирования о форс - мажоре], " +
-                    "Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] FROM Договор inner join(Сотрудник inner join Должность ON " +
-                    "Должность.[Код должности] = Сотрудник.[Код должности]) ON Договор.[Код сотрудника] = Сотрудник.[Код сотрудника] inner join Поставщик ON Поставщик.[ИНН поставщика] = " +
-                    "Договор.[ИНН поставщика] inner join([Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) ON" +
-                    "[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] inner join НДС ON НДС.[Код НДС] = Договор.НДС " +
+                    "Договор.[Информирование в случае невозможности поставки], Договор.Пени, Договор.[Действие договора до] " +
+                    "FROM Договор " +
+                    "inner join(Сотрудник " +
+                    "inner join Должность ON " +
+                    "Должность.[Код должности] = Сотрудник.[Код должности]) " +
+                    "ON Договор.[Код сотрудника] = Сотрудник.[Код сотрудника] " +
+                    "inner join Поставщик ON Поставщик.[ИНН поставщика] = " + "Договор.[ИНН поставщика] inner join([Характеристики лекарств] " +
+                    "inner join Лекарства ON Лекарства.[Код лекарства] =[Характеристики лекарств].[Код лекарства]) " +
+                    "ON" +"[Характеристики лекарств].[Номер договора] = Договор.[Номер договора] " +
+                    "inner join НДС ON НДС.[Код НДС] = Договор.НДС " +
                     "WHERE Договор.[Действие договора до]> GETDATE()", Connection);
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "info");
@@ -348,6 +416,16 @@ namespace vkr
                 label1.Text = "Количество записей " + rows.ToString();
             }
             else { dataset(); }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

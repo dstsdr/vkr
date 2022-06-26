@@ -25,11 +25,16 @@ namespace vkr
             SqlDataAdapter adapter = new SqlDataAdapter("Select MONTH([Безрецептурные продажи].Дата) AS Месяц, COUNT([Серийный номер].[Код характеристики]) AS Количество " +
                 "FROM [Серийный номер] inner join([Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства] = [Характеристики лекарств].[Код лекарства])ON " +
                 "[Серийный номер].[Код характеристики] =[Характеристики лекарств].[Код характеристики]  inner join [Безрецептурные продажи] ON [Серийный номер].[Код безрецептурной продажи]" +
-                "=[Безрецептурные продажи].[№] WHERE Лекарства.Наименование = '" + comboBox1.Text + "' Group by MONTH([Безрецептурные продажи].Дата), Лекарства.Наименование UNION Select" +
-                " MONTH([Рецептурные продажи].Дата) AS Месяц, SUM([Рецептурные продажи].Количество) AS Количество " +
-                "FROM[Рецептурные продажи] inner join([Характеристики лекарств] inner join Лекарства ON Лекарства.[Код лекарства]=" +
-                "[Характеристики лекарств].[Код лекарства])ON[Рецептурные продажи].[Код характеристики] =[Характеристики лекарств].[Код характеристики] " +
-                "WHERE Лекарства.Наименование = '" + comboBox1.Text + "' Group by MONTH([Рецептурные продажи].Дата), Лекарства.Наименование", Connection);
+                "=[Безрецептурные продажи].[№] WHERE Лекарства.Наименование = '" + comboBox1.Text + "' " +
+                "Group by MONTH([Безрецептурные продажи].Дата), Лекарства.Наименование " +
+                "UNION " +
+                "Select" +" MONTH([Рецептурные продажи].Дата) AS Месяц, SUM([Рецептурные продажи].Количество) AS Количество " +
+                "FROM[Рецептурные продажи] " +
+                "inner join([Характеристики лекарств] " +
+                "inner join Лекарства ON Лекарства.[Код лекарства]=" + "[Характеристики лекарств].[Код лекарства])" +
+                "ON[Рецептурные продажи].[Код характеристики] =[Характеристики лекарств].[Код характеристики] " +
+                "WHERE Лекарства.Наименование = '" + comboBox1.Text + "' " +
+                "Group by MONTH([Рецептурные продажи].Дата), Лекарства.Наименование", Connection);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "info");
             dataGridView2.DataSource = ds.Tables[0];
@@ -57,30 +62,6 @@ namespace vkr
             dataGridView2.Rows[i].Cells[2].Value = ((Convert.ToDouble(dataGridView2.Rows[i - 3].Cells[1].Value)+Convert.ToDouble(dataGridView2.Rows[i - 2].Cells[1].Value) + Convert.ToDouble(dataGridView2.Rows[i - 1].Cells[1].Value))/3) + ((1 / 3) * (Convert.ToDouble(dataGridView2.Rows[i - 2].Cells[1].Value) - Convert.ToDouble(dataGridView2.Rows[i - 1].Cells[1].Value)));
 
             }
-            /* if (dataGridView2.Rows.Count - 1 ==12)
-             {
-                 dataGridView2.Columns.Add("column3", "Cезонный коэффициент");
-                 dataGridView2.Columns.Add("column4", "Рекомендуемое число");
-                 double summ = 0;
-                 for (int i = 0; i < dataGridView2.Rows.Count - 1; i++)
-                     {
-                         summ = summ + Convert.ToDouble(dataGridView2.Rows[i].Cells[1].Value);
-                     }
-                 double years = summ / 12;
-                 for (int i = 0; i < dataGridView2.Rows.Count - 2; i++)
-                     {
-                         dataGridView2.Rows[i].Cells[3].Value = Convert.ToDouble(dataGridView2.Rows[i+1].Cells[1].Value) / Convert.ToDouble(dataGridView2.Rows[i].Cells[1].Value);
-                     }
-                 for (int i = 1; i < dataGridView2.Rows.Count - 1; i++)
-                 {
-                     dataGridView2.Rows[i].Cells[4].Value =(Convert.ToDouble(dataGridView2.Rows[i].Cells[1].Value) + Convert.ToDouble(dataGridView2.Rows[i-1].Cells[1].Value))/2 * Convert.ToDouble(dataGridView2.Rows[i].Cells[3].Value);
-                 }
-                 int j = dataGridView2.Rows.Count - 1;
-                 dataGridView2.Rows[12].Cells[1].Value = ((Convert.ToDouble(dataGridView2.Rows[j - 3].Cells[1].Value) + Convert.ToDouble(dataGridView2.Rows[j - 2].Cells[1].Value) + Convert.ToDouble(dataGridView2.Rows[j - 1].Cells[1].Value)) / 3) + ((1 / 3) * (Convert.ToDouble(dataGridView2.Rows[j - 2].Cells[1].Value) - Convert.ToDouble(dataGridView2.Rows[j - 1].Cells[1].Value)));
-
-                 dataGridView2.Rows[0].Cells[4].Value = (Convert.ToDouble(dataGridView2.Rows[0].Cells[1].Value) + Convert.ToDouble(dataGridView2.Rows[12].Cells[1].Value))/2 * Convert.ToDouble(dataGridView2.Rows[0].Cells[3].Value);
-
-             }  */
             dataGridView2.Columns.Add("column3", "Cезонный коэффициент");
             dataGridView2.Columns.Add("column4", "Рекомендуемое число");
             double summ = 0;
@@ -134,6 +115,9 @@ namespace vkr
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            button7.Visible = false;
+            button8.Visible = false;
+
             this.dataGridView2.DataSource = null;
             this.dataGridView2.DataBindings.Clear();
             while (dataGridView2.Rows.Count > 1)
@@ -164,7 +148,7 @@ namespace vkr
                     comboBox1.Items.Add(dr2["Наименование"].ToString());
                 }
                 Connection.Close();
-                comboBox1.Visible = true;
+                comboBox1.Visible = true;               
             }
             else
             {
@@ -193,7 +177,9 @@ namespace vkr
             button1.Visible = false;
             int rows = dataGridView2.Rows.Count - 1;
             label1.Visible = true;
-            label1.Text = "Количество лекарственных средств: " + rows.ToString();
+            label1.Text = "Количество товаров: " + rows.ToString();
+            button7.Visible = true;
+            button8.Visible = true;
         }
         private void zvnlpapteki()
         {

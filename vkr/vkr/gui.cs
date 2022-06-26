@@ -196,5 +196,11 @@ namespace vkr
             apteka frm2 = new apteka();
             frm2.Show();
         }
+
+        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            spravka frm2 = new spravka();
+            frm2.Show();
+        }
     }
 }

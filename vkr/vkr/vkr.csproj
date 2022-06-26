@@ -169,6 +169,12 @@
     <Compile Include="sotr.Designer.cs">
       <DependentUpon>sotr.cs</DependentUpon>
     </Compile>
+    <Compile Include="spravka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="spravka.Designer.cs">
+      <DependentUpon>spravka.cs</DependentUpon>
+    </Compile>
     <Compile Include="statistika.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,12 +267,16 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="sale.resx">
       <DependentUpon>sale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sotr.resx">
       <DependentUpon>sotr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="spravka.resx">
+      <DependentUpon>spravka.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="statistika.resx">
       <DependentUpon>statistika.cs</DependentUpon>
@@ -324,6 +334,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RXNT_Blog_091918_SenateBipartisanOpioidResponse_1180px-panorama.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
